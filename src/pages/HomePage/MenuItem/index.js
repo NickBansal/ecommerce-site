@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const Item = styled.div`
 	min-width: 30%;
@@ -66,6 +67,7 @@ const Item = styled.div`
 
 		.content {
 			opacity: 0.9;
+			transition: opacity 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 		}
 	}
 `;
@@ -83,4 +85,4 @@ const MenuItem = ({ title, imageUrl, size }) => (
 	</Item>
 );
 
-export default MenuItem;
+export default withRouter(MenuItem);
