@@ -72,8 +72,8 @@ const Item = styled.div`
 	}
 `;
 
-const MenuItem = ({ title, imageUrl, size }) => (
-	<Item size={size}>
+const MenuItem = ({ title, imageUrl, size, history }) => (
+	<Item size={size} onClick={() => history.push(`/${title}`)}>
 		<div
 			className="background-image"
 			style={{ backgroundImage: `url(${imageUrl})` }}

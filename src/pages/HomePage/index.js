@@ -22,13 +22,8 @@ const HomePage = () => (
 	<Container>
 		<h1>Welcome to my Homepage</h1>
 		<DirMenu>
-			{options.map(({ title, id, imageUrl, size }) => (
-				<MenuItem
-					title={title}
-					key={id}
-					imageUrl={imageUrl}
-					size={size}
-				/>
+			{options.map(({ id, ...rest }) => (
+				<MenuItem key={id} {...rest} />
 			))}
 		</DirMenu>
 	</Container>
