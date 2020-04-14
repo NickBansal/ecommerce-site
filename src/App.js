@@ -1,5 +1,7 @@
 import React from 'react';
 
-const App = () => <div>Hello World!</div>;
+import HomePage from './pages/Homepage';
+
+const App = () => <HomePage />;
 
 export default App;
