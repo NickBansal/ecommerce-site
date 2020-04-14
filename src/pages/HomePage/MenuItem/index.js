@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
@@ -18,6 +18,9 @@ const Item = styled.div`
 		height: 100%;
 		background-position: center;
 		background-size: cover;
+		transform: scale(${({ imgEffect }) => (imgEffect ? '1.2' : '1')});
+
+		transition: transform 4s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 	}
 
 	.content {
@@ -60,11 +63,6 @@ const Item = styled.div`
 	&:hover {
 		cursor: pointer;
 
-		.background-image {
-			transform: scale(1.1);
-			transition: transform 4s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-		}
-
 		.content {
 			opacity: 0.9;
 			transition: opacity 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
@@ -72,17 +70,26 @@ const Item = styled.div`
 	}
 `;
 
-const MenuItem = ({ title, imageUrl, size, history }) => (
-	<Item size={size} onClick={() => history.push(`/${title}`)}>
-		<div
-			className="background-image"
-			style={{ backgroundImage: `url(${imageUrl})` }}
-		/>
-		<div className="content">
-			<div className="title">{title.toUpperCase()}</div>
-			<span className="subtitle">SHOP NOW</span>
-		</div>
-	</Item>
-);
+const MenuItem = ({ title, imageUrl, size, history }) => {
+	const [imgEffect, setImageEffect] = useState(false);
+	return (
+		<Item
+			size={size}
+			imgEffect={imgEffect}
+			onClick={() => history.push(`/${title}`)}
+			onMouseEnter={() => setImageEffect(true)}
+			onMouseLeave={() => setImageEffect(false)}
+		>
+			<div
+				className="background-image"
+				style={{ backgroundImage: `url(${imageUrl})` }}
+			/>
+			<div className="content">
+				<div className="title">{title.toUpperCase()}</div>
+				<span className="subtitle">SHOP NOW</span>
+			</div>
+		</Item>
+	);
+};
 
 export default withRouter(MenuItem);
