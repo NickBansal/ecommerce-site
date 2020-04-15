@@ -1,5 +1,6 @@
 import HomePage from './HomePage';
-import HatsPage from './HatsPage';
-import ShopPage from './ShopPage';
+import Hats from './Hats';
+import Shop from './Shop';
+import SignIn from './SignIn';
 
-export { HomePage, HatsPage, ShopPage };
+export { HomePage, Hats, Shop, SignIn };
