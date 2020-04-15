@@ -20,7 +20,7 @@ const Item = styled.div`
 		background-size: cover;
 		transform: scale(${({ imgEffect }) => (imgEffect ? '1.2' : '1')});
 
-		transition: transform 4s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+		transition: transform 2s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 	}
 
 	.content {

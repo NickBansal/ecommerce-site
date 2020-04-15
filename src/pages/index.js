@@ -1,4 +1,5 @@
 import HomePage from './HomePage';
 import HatsPage from './HatsPage';
+import ShopPage from './ShopPage';
 
-export { HomePage, HatsPage };
+export { HomePage, HatsPage, ShopPage };
