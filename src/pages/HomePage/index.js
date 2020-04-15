@@ -20,7 +20,6 @@ const DirMenu = styled.div`
 
 const HomePage = () => (
 	<Container>
-		<h1>Welcome to my Homepage</h1>
 		<DirMenu>
 			{options.map(({ id, ...rest }) => (
 				<MenuItem key={id} {...rest} />
