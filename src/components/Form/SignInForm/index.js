@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import FormInput from '../FormInput';
 import CutomButton from '../../CustomButton';
 
+import { signInWithGoogle } from '../../../firebase/utils';
+
 const Container = styled.div`
 	width: 30vw;
 	display: flex;
@@ -51,6 +53,10 @@ const SignInForm = () => {
 					required
 				/>
 				<CutomButton type="submit"> SIGN IN </CutomButton>
+				<CutomButton onClick={signInWithGoogle}>
+					{' '}
+					SIGN IN WITH GOOGLE{' '}
+				</CutomButton>
 			</form>
 		</Container>
 	);

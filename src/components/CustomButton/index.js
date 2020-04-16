@@ -24,6 +24,8 @@ const Button = styled.button`
 	}
 `;
 
-const CustomButton = ({ children }) => <Button>{children}</Button>;
+const CustomButton = ({ children, ...rest }) => (
+	<Button {...rest}>{children}</Button>
+);
 
 export default CustomButton;
