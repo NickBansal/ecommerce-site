@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
+import CutomButton from '../../CustomButton';
 
 const Container = styled.div`
 	width: 30vw;
@@ -10,10 +11,22 @@ const Container = styled.div`
 `;
 
 const SignInForm = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [state, setState] = useState({
+		email: '',
+		password: ''
+	});
 
 	const handleSubmit = e => e.preventDefault();
+
+	const handleChange = e => {
+		const { name, value } = e.target;
+		setState({
+			...state,
+			[name]: value
+		});
+	};
+
+	const { email, password } = state;
 
 	return (
 		<Container>
@@ -25,7 +38,7 @@ const SignInForm = () => {
 					label="email"
 					name="email"
 					type="email"
-					handleChange={e => setEmail(e.target.value)}
+					handleChange={handleChange}
 					value={email}
 					required
 				/>
@@ -33,11 +46,11 @@ const SignInForm = () => {
 					label="password"
 					name="password"
 					type="password"
-					handleChange={e => setPassword(e.target.value)}
+					handleChange={handleChange}
 					value={password}
 					required
 				/>
-				<input type="submit" />
+				<CutomButton type="submit"> SIGN IN </CutomButton>
 			</form>
 		</Container>
 	);
