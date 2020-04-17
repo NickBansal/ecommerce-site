@@ -11,15 +11,21 @@ const App = () => {
 	const [currentUser, setUser] = useState(null);
 
 	useEffect(() => {
-		auth.onAuthStateChanged(user => {
-			createUserProfileDocument(user);
-		});
+		auth.onAuthStateChanged(async userAuth => {
+			const userRef = await createUserProfileDocument(userAuth);
 
-		return () =>
-			auth.onAuthStateChanged(user => {
-				setUser(user);
-			});
-	}, [currentUser]);
+			if (userAuth) {
+				userRef.onSnapshot(snapShot => {
+					setUser({
+						id: snapShot.id,
+						...snapShot.data()
+					});
+				});
+			} else {
+				setUser(userAuth);
+			}
+		});
+	}, []);
 
 	return (
 		<div>
