@@ -14,7 +14,7 @@ const Container = styled.div`
 const LogoStyled = styled(Logo)`
 	height: 100%;
 	width: 70px;
-	padding: 25px;
+	padding: 10px;
 `;
 
 const Options = styled.div`
