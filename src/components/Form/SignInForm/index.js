@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
 
-import { signInWithGoogle } from '../../../firebase/utils';
+import { auth, signInWithGoogle } from '../../../firebase/utils';
 
 const Container = styled.div`
 	width: 30vw;
@@ -24,7 +24,21 @@ const SignInForm = () => {
 		password: ''
 	});
 
-	const handleSubmit = e => e.preventDefault();
+	const handleSubmit = async e => {
+		const { email, password } = state;
+
+		e.preventDefault();
+
+		try {
+			await auth.signInWithEmailAndPassword(email, password);
+			setState({
+				email: '',
+				password: ''
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const handleChange = e => {
 		const { name, value } = e.target;
