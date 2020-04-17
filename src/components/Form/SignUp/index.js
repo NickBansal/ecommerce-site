@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
+import FormError from '../Error';
 
 import { auth } from '../../../firebase/utils';
 import createUserProfileDocument from '../../../firebase/createUser';
@@ -26,6 +27,8 @@ const SignUp = () => {
 		confirmPassword: ''
 	});
 
+	const [error, setError] = useState(false);
+
 	const handleSubmit = async e => {
 		const { displayName, email, password, confirmPassword } = state;
 		e.preventDefault();
@@ -48,8 +51,9 @@ const SignUp = () => {
 				password: '',
 				confirmPassword: ''
 			});
-		} catch (error) {
-			console.log(error);
+			setError(false);
+		} catch (err) {
+			setError(err);
 		}
 	};
 
@@ -100,6 +104,7 @@ const SignUp = () => {
 					value={confirmPassword}
 					required
 				/>
+				{error && <FormError>{error.message}</FormError>}
 				<CustomButton type="submit"> SIGN UP </CustomButton>
 			</form>
 		</Container>

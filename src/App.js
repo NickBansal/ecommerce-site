@@ -30,8 +30,6 @@ const App = () => {
 		return () => unsubscribeFromAuth();
 	}, []);
 
-	console.log(currentUser);
-
 	return (
 		<div>
 			<GlobalStyle />

@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
+import FormError from '../Error';
 
 import { auth, signInWithGoogle } from '../../../firebase/utils';
 
 const Container = styled.div`
-	width: 30vw;
+	width: 380px;
 	display: flex;
 	flex-direction: column;
 	margin: 20px;
@@ -24,6 +25,8 @@ const SignInForm = () => {
 		password: ''
 	});
 
+	const [error, setError] = useState(false);
+
 	const handleSubmit = async e => {
 		const { email, password } = state;
 
@@ -35,8 +38,9 @@ const SignInForm = () => {
 				email: '',
 				password: ''
 			});
-		} catch (error) {
-			console.log(error);
+			setError(false);
+		} catch (err) {
+			setError(err);
 		}
 	};
 
@@ -72,6 +76,7 @@ const SignInForm = () => {
 					value={password}
 					required
 				/>
+				{error && <FormError>{error.message}</FormError>}
 				<Buttons>
 					<CustomButton type="submit"> SIGN IN </CustomButton>
 					<CustomButton onClick={signInWithGoogle} isGoogle>

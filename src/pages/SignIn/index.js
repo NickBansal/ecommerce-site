@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SignInForm from '../../components/Form/SignInForm';
+import SignInForm from '../../components/Form/SignIn';
 import SignUp from '../../components/Form/SignUp';
 
 const Container = styled.div`
