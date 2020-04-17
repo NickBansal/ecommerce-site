@@ -7,9 +7,14 @@ import CutomButton from '../../CustomButton';
 import { signInWithGoogle } from '../../../firebase/utils';
 
 const Container = styled.div`
-	width: 30vw;
+	width: 380px;
 	display: flex;
 	flex-direction: column;
+`;
+
+const Buttons = styled.div`
+	display: flex;
+	justify-content: space-between;
 `;
 
 const SignInForm = () => {
@@ -52,11 +57,13 @@ const SignInForm = () => {
 					value={password}
 					required
 				/>
-				<CutomButton type="submit"> SIGN IN </CutomButton>
-				<CutomButton onClick={signInWithGoogle}>
-					{' '}
-					SIGN IN WITH GOOGLE{' '}
-				</CutomButton>
+				<Buttons>
+					<CutomButton type="submit"> SIGN IN </CutomButton>
+					<CutomButton onClick={signInWithGoogle} isGoogle>
+						{' '}
+						SIGN IN WITH GOOGLE{' '}
+					</CutomButton>
+				</Buttons>
 			</form>
 		</Container>
 	);

@@ -23,16 +23,15 @@ const Options = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	cursor: pointer;
 
 	.option {
 		padding: 10px 15px;
+		cursor: pointer;
 	}
 `;
 
 const Header = ({ currentUser }) => (
 	<Container>
-		{console.log(currentUser)}
 		<Link to="/">
 			<LogoStyled />
 		</Link>
@@ -44,7 +43,13 @@ const Header = ({ currentUser }) => (
 				CONTACT
 			</Link>
 			{currentUser ? (
-				<div className="option" onClick={() => auth.signOut()}>
+				// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+				<div
+					className="option"
+					tabIndex="0"
+					role="button"
+					onClick={() => auth.signOut()}
+				>
 					SIGN OUT
 				</div>
 			) : (
