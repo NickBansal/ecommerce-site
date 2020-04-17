@@ -11,7 +11,8 @@ const App = () => {
 	const [currentUser, setUser] = useState(null);
 
 	useEffect(() => {
-		auth.onAuthStateChanged(async userAuth => {
+		let unsubscribeFromAuth = null;
+		unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 			const userRef = await createUserProfileDocument(userAuth);
 
 			if (userAuth) {
@@ -25,7 +26,11 @@ const App = () => {
 				setUser(userAuth);
 			}
 		});
+
+		return () => unsubscribeFromAuth();
 	}, []);
+
+	console.log(currentUser);
 
 	return (
 		<div>

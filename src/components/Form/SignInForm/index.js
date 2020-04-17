@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
-import CutomButton from '../../CustomButton';
+import CustomButton from '../../CustomButton';
 
 import { signInWithGoogle } from '../../../firebase/utils';
 
 const Container = styled.div`
-	width: 380px;
+	width: 30vw;
 	display: flex;
 	flex-direction: column;
+	margin: 20px;
 `;
 
 const Buttons = styled.div`
@@ -58,11 +59,11 @@ const SignInForm = () => {
 					required
 				/>
 				<Buttons>
-					<CutomButton type="submit"> SIGN IN </CutomButton>
-					<CutomButton onClick={signInWithGoogle} isGoogle>
+					<CustomButton type="submit"> SIGN IN </CustomButton>
+					<CustomButton onClick={signInWithGoogle} isGoogle>
 						{' '}
 						SIGN IN WITH GOOGLE{' '}
-					</CutomButton>
+					</CustomButton>
 				</Buttons>
 			</form>
 		</Container>
