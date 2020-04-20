@@ -1,4 +1,4 @@
-import { userTypes } from './userTypes';
+import userTypes from './types';
 
 const INITIAL_STATE = {
 	currentUser: null

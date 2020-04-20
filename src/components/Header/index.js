@@ -2,12 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { setCurrentUser } from '../../redux/user/userActions';
+import { setCurrentUser } from '../../redux/user/actions';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/utils';
 
-import CartIcon from './CartIcon';
+import CartIcon from '../Carts/Icon';
+import CartDropDown from '../Carts/DropDown';
 
 const Container = styled.div`
 	display: flex;
@@ -34,7 +35,7 @@ const Options = styled.div`
 	}
 `;
 
-const Header = ({ currentUser, setUser }) => (
+const Header = ({ currentUser, setUser, isDropdownHidden }) => (
 	<Container>
 		<Link to="/">
 			<LogoStyled />
@@ -66,11 +67,13 @@ const Header = ({ currentUser, setUser }) => (
 			)}
 			<CartIcon />
 		</Options>
+		{isDropdownHidden && <CartDropDown />}
 	</Container>
 );
 
 const mapStateToProps = state => ({
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
+	isDropdownHidden: !state.cart.hidden
 });
 
 const mapDispatchToProps = dispatch => ({

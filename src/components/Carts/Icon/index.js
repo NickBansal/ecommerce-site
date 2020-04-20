@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import { setCurrentCart } from '../../../redux/cart/actions';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
 
@@ -26,11 +29,15 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = () => (
-	<Container>
+const CartIcon = ({ toggleCart }) => (
+	<Container onClick={toggleCart}>
 		<ShoppingIcon className="shopping-icon" />
 		<span className="item-count"> 0 </span>
 	</Container>
 );
 
-export default CartIcon;
+const mapDispatchToProps = dispatch => ({
+	toggleCart: () => dispatch(setCurrentCart())
+});
+
+export default connect(null, mapDispatchToProps)(CartIcon);
