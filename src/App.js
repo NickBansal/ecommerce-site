@@ -10,7 +10,7 @@ import { setCurrentUser } from './redux/user/userActions';
 import { auth } from './firebase/utils';
 import createUserProfileDocument from './firebase/createUser';
 
-const App = props => {
+const App = ({ setUser }) => {
 	useEffect(() => {
 		let unsubscribeFromAuth = null;
 		unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -18,7 +18,7 @@ const App = props => {
 
 			if (userAuth) {
 				userRef.onSnapshot(snapShot => {
-					props.setCurrentUser({
+					setUser({
 						id: snapShot.id,
 						...snapShot.data()
 					});
@@ -42,7 +42,7 @@ const App = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	setCurrentUser: user => dispatch(setCurrentUser(user))
+	setUser: user => dispatch(setCurrentUser(user))
 });
 
 export default connect(null, mapDispatchToProps)(App);
