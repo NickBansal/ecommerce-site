@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { setCurrentUser } from '../../redux/user/userActions';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/utils';
@@ -31,7 +32,7 @@ const Options = styled.div`
 	}
 `;
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, setUser }) => (
 	<Container>
 		<Link to="/">
 			<LogoStyled />
@@ -49,7 +50,10 @@ const Header = ({ currentUser }) => (
 					className="option"
 					tabIndex="0"
 					role="button"
-					onClick={() => auth.signOut()}
+					onClick={() => {
+						auth.signOut();
+						setUser(null);
+					}}
 				>
 					SIGN OUT
 				</div>
@@ -62,11 +66,12 @@ const Header = ({ currentUser }) => (
 	</Container>
 );
 
-const mapStateToProps = state => {
-	console.log(state);
-	return {
-		currentUser: state.user.currentUser
-	};
-};
+const mapStateToProps = state => ({
+	currentUser: state.user.currentUser
+});
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+	setUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
