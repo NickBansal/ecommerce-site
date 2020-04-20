@@ -7,6 +7,8 @@ import { setCurrentUser } from '../../redux/user/userActions';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/utils';
 
+import CartIcon from './CartIcon';
+
 const Container = styled.div`
 	display: flex;
 	align-items: center;
@@ -62,6 +64,7 @@ const Header = ({ currentUser, setUser }) => (
 					SIGN IN
 				</Link>
 			)}
+			<CartIcon />
 		</Options>
 	</Container>
 );
