@@ -19,13 +19,15 @@ const Container = styled.div`
 	}
 `;
 
+const blankForm = {
+	displayName: '',
+	email: '',
+	password: '',
+	confirmPassword: ''
+};
+
 const SignUp = () => {
-	const [state, setState] = useState({
-		displayName: '',
-		email: '',
-		password: '',
-		confirmPassword: ''
-	});
+	const [state, setState] = useState(blankForm);
 
 	const [error, setError] = useState(false);
 
@@ -35,25 +37,21 @@ const SignUp = () => {
 
 		if (password !== confirmPassword) {
 			alert('Password must match');
-		}
+			setState(blankForm);
+		} else {
+			try {
+				const { user } = await auth.createUserWithEmailAndPassword(
+					email,
+					password
+				);
 
-		try {
-			const { user } = await auth.createUserWithEmailAndPassword(
-				email,
-				password
-			);
+				await createUserProfileDocument(user, { displayName });
 
-			await createUserProfileDocument(user, { displayName });
-
-			setState({
-				displayName: '',
-				email: '',
-				password: '',
-				confirmPassword: ''
-			});
-			setError(false);
-		} catch (err) {
-			setError(err);
+				setState(blankForm);
+				setError(false);
+			} catch (err) {
+				setError(err);
+			}
 		}
 	};
 
