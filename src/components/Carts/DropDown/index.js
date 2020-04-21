@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import CustomButton from '../../CustomButton';
 import Items from '../Items';
+
 import { selectCartItems } from '../../../redux/cart/selectors';
+import { setCurrentCart } from '../../../redux/cart/actions';
 
 const Container = styled.div`
 	position: absolute;
@@ -32,7 +35,7 @@ const Container = styled.div`
 	}
 `;
 
-const CartDropDown = ({ cartItems }) => (
+const CartDropDown = ({ cartItems, toggleCart }) => (
 	<Container>
 		<div className="cart-dropdown">
 			<div className="cart-items">
@@ -43,7 +46,9 @@ const CartDropDown = ({ cartItems }) => (
 					/>
 				))}
 			</div>
-			<CustomButton>GO TO CHECKOUT</CustomButton>
+			<Link to="/checkout">
+				<CustomButton onClick={toggleCart}>GO TO CHECKOUT</CustomButton>
+			</Link>
 		</div>
 	</Container>
 );
@@ -52,4 +57,8 @@ const mapStateToProps = createStructuredSelector({
 	cartItems: selectCartItems
 });
 
-export default connect(mapStateToProps)(CartDropDown);
+const mapDispatchToProps = dispatch => ({
+	toggleCart: () => dispatch(setCurrentCart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);

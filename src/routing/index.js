@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentUser } from '../redux/user/selectors';
-import { HomePage, Hats, Shop, SignIn } from '../pages';
+import { HomePage, Hats, Shop, SignIn, Checkout } from '../pages';
 
 const Routes = ({ currentUser }) => (
 	<Switch>
@@ -16,6 +16,7 @@ const Routes = ({ currentUser }) => (
 			path="/signin"
 			render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
 		/>
+		<Route path="/checkout" component={Checkout} />
 	</Switch>
 );
 
