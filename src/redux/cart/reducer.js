@@ -26,8 +26,10 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				cartItems: removeItems(action.payload, state.cartItems),
-				totalItems: state.totalItems - 1,
-				totalPrice: state.totalPrice - action.payload.price
+				totalItems: state.totalItems - action.payload.quantity,
+				totalPrice:
+					state.totalPrice -
+					action.payload.price * action.payload.quantity
 			};
 		default:
 			return state;

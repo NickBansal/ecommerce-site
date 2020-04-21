@@ -27,6 +27,16 @@ const Container = styled.div`
 	}
 `;
 
+const Arrow = styled.span`
+	padding: 5px;
+	cursor: pointer;
+	color: lightgrey;
+
+	&:hover {
+		color: black;
+	}
+`;
+
 const Image = styled.div`
 	width: 23%;
 	padding-right: 15px;
@@ -46,7 +56,9 @@ const CheckoutItem = ({
 			<img src={imageUrl} alt="item" />
 		</Image>
 		<span className="name">{name}</span>
-		<span className="quantity">{quantity}</span>
+		<div className="quantity">
+			<Arrow>&#10094;</Arrow> {quantity} <Arrow>&#10095;</Arrow>{' '}
+		</div>
 		<span className="price">{price}</span>
 		<div
 			className="remove-button"
