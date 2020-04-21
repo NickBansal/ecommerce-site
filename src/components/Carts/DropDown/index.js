@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -8,7 +8,7 @@ import CustomButton from '../../CustomButton';
 import Items from '../Items';
 
 import { selectCartItems } from '../../../redux/cart/selectors';
-import { setCurrentCart } from '../../../redux/cart/actions';
+import { toggleCurrentCart } from '../../../redux/cart/actions';
 
 const Container = styled.div`
 	position: absolute;
@@ -35,21 +35,34 @@ const Container = styled.div`
 	}
 `;
 
-const CartDropDown = ({ cartItems, toggleCart }) => (
+const NoItems = styled.p`
+	text-align: center;
+`;
+
+const CartDropDown = ({ cartItems, history, dispatch }) => (
 	<Container>
-		<div className="cart-dropdown">
-			<div className="cart-items">
-				{cartItems.map(cartItem => (
-					<Items
-						key={`${cartItem.id}${cartItem.name}`}
-						item={cartItem}
-					/>
-				))}
+		{!cartItems.length ? (
+			<NoItems>There are no items in your cart</NoItems>
+		) : (
+			<div className="cart-dropdown">
+				<div className="cart-items">
+					{cartItems.map(cartItem => (
+						<Items
+							key={`${cartItem.id}${cartItem.name}`}
+							item={cartItem}
+						/>
+					))}
+				</div>
+				<CustomButton
+					onClick={() => {
+						history.push('/checkout');
+						dispatch(toggleCurrentCart());
+					}}
+				>
+					GO TO CHECKOUT
+				</CustomButton>
 			</div>
-			<Link to="/checkout">
-				<CustomButton onClick={toggleCart}>GO TO CHECKOUT</CustomButton>
-			</Link>
-		</div>
+		)}
 	</Container>
 );
 
@@ -57,8 +70,4 @@ const mapStateToProps = createStructuredSelector({
 	cartItems: selectCartItems
 });
 
-const mapDispatchToProps = dispatch => ({
-	toggleCart: () => dispatch(setCurrentCart())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);
+export default withRouter(connect(mapStateToProps)(CartDropDown));

@@ -2,7 +2,7 @@ export const calculateQuanity = (payload, cartItems) => {
 	const newItems = cartItems.slice();
 
 	if (
-		!cartItems.find(
+		!cartItems.some(
 			item => item.id === payload.id && item.name === payload.name
 		)
 	) {

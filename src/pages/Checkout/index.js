@@ -44,6 +44,11 @@ const Header = styled.div`
 	}
 `;
 
+const NoItems = styled.p`
+	text-align: center;
+	font-size: 18px;
+`;
+
 const Checkout = ({ cartItems, total, removeItems }) => (
 	<Container>
 		<Header>
@@ -63,14 +68,20 @@ const Checkout = ({ cartItems, total, removeItems }) => (
 				<span>Remove</span>
 			</div>
 		</Header>
-		{cartItems.map(cartItem => (
-			<CheckoutItem
-				key={`${cartItem.id} ${cartItem.name}`}
-				cartItem={cartItem}
-				removeItems={removeItems}
-			/>
-		))}
-		<div className="total">TOTAL: £{total}</div>
+		{!cartItems.length ? (
+			<NoItems>There are no items here to buy</NoItems>
+		) : (
+			cartItems.map(cartItem => (
+				<CheckoutItem
+					key={`${cartItem.id} ${cartItem.name}`}
+					cartItem={cartItem}
+					removeItems={removeItems}
+				/>
+			))
+		)}
+		{Boolean(cartItems.length) && (
+			<div className="total">TOTAL: £{total}</div>
+		)}
 	</Container>
 );
 
