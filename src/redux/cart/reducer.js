@@ -2,7 +2,7 @@ import cartTypes from './types';
 import { calculateQuanity } from './utils';
 
 const INITIAL_STATE = {
-	hidden: true,
+	hidden: false,
 	cartItems: [],
 	totalItems: 0
 };
