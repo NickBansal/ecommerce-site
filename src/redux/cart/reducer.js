@@ -1,5 +1,5 @@
 import cartTypes from './types';
-import { calculateQuanity } from './utils';
+import { calculateQuanity, removeItems } from './utils';
 
 const INITIAL_STATE = {
 	hidden: false,
@@ -19,6 +19,12 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				cartItems: calculateQuanity(action.payload, state.cartItems),
 				totalItems: state.totalItems + 1
+			};
+		case cartTypes.REMOVE_FROM_CART:
+			return {
+				...state,
+				cartItems: removeItems(action.payload, state.cartItems),
+				totalItems: state.totalItems - 1
 			};
 		default:
 			return state;

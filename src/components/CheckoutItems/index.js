@@ -23,22 +23,24 @@ const Container = styled.div`
 	.remove-button {
 		padding-left: 12px;
 		cursor: pointer;
+		outline: none;
 	}
 `;
 
 const Image = styled.div`
-	.image-container {
-		width: 23%;
-		padding-right: 15px;
+	width: 23%;
+	padding-right: 15px;
 
-		img {
-			width: 100%;
-			height: 100%;
-		}
+	img {
+		width: 100%;
+		height: 100%;
 	}
 `;
 
-const CheckoutItem = ({ cartItem: { name, imageUrl, price, quantity } }) => (
+const CheckoutItem = ({
+	cartItem: { name, imageUrl, price, quantity, id },
+	removeItems
+}) => (
 	<Container>
 		<Image>
 			<img src={imageUrl} alt="item" />
@@ -46,7 +48,15 @@ const CheckoutItem = ({ cartItem: { name, imageUrl, price, quantity } }) => (
 		<span className="name">{name}</span>
 		<span className="quantity">{quantity}</span>
 		<span className="price">{price}</span>
-		<div className="remove-button">&#10005;</div>
+		<div
+			className="remove-button"
+			role="button"
+			tabIndex={0}
+			onClick={() => removeItems({ name, imageUrl, price, quantity, id })}
+			onKeyDown={() => {}}
+		>
+			&#10005;
+		</div>
 	</Container>
 );
 

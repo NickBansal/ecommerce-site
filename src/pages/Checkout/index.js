@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { removeItemsFromCart } from '../../redux/cart/actions';
+
 import CheckoutItem from '../../components/CheckoutItems';
 
 import {
@@ -42,7 +44,7 @@ const Header = styled.div`
 	}
 `;
 
-const Checkout = ({ cartItems, total }) => (
+const Checkout = ({ cartItems, total, removeItems }) => (
 	<Container>
 		<Header>
 			<div className="header-block">
@@ -62,7 +64,11 @@ const Checkout = ({ cartItems, total }) => (
 			</div>
 		</Header>
 		{cartItems.map(cartItem => (
-			<CheckoutItem key={cartItem.id} cartItem={cartItem} />
+			<CheckoutItem
+				key={cartItem.id}
+				cartItem={cartItem}
+				removeItems={removeItems}
+			/>
 		))}
 		<div className="total">TOTAL: £{total}</div>
 	</Container>
@@ -73,4 +79,8 @@ const mapStateToProps = createStructuredSelector({
 	total: selectCartTotalItems
 });
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => ({
+	removeItems: user => dispatch(removeItemsFromCart(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

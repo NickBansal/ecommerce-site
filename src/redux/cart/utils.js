@@ -17,3 +17,21 @@ export const calculateQuanity = (payload, cartItems) => {
 
 	return newItems;
 };
+
+export const removeItems = (payload, cartItems) => {
+	if (payload.quantity === 1) {
+		return cartItems.filter(
+			item => item.id !== payload.id && item.name !== payload.name
+		);
+	}
+
+	return cartItems.map(item => {
+		if (item.id === payload.id && item.name === payload.name) {
+			return {
+				...item,
+				quantity: item.quantity - 1
+			};
+		}
+		return item;
+	});
+};
