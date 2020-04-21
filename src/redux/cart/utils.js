@@ -7,8 +7,7 @@ export default (payload, cartItems) => {
 			item => item.id === newPayload.id && item.name === newPayload.name
 		)
 	) {
-		newPayload.quantity = 1;
-		return [...cartItems, newPayload];
+		return [...cartItems, { ...newPayload, quantity: 1 }];
 	}
 
 	const arrayIndex = newItems.findIndex(

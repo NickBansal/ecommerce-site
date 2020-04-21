@@ -26,7 +26,7 @@ const Item = styled.div`
 		width: 80%;
 		opacity: 0;
 		position: absolute;
-		top: 250px;
+		top: 230px;
 	}
 
 	&:hover {
