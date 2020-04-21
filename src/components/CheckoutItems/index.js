@@ -47,29 +47,31 @@ const Image = styled.div`
 	}
 `;
 
-const CheckoutItem = ({
-	cartItem: { name, imageUrl, price, quantity, id },
-	removeItems
-}) => (
-	<Container>
-		<Image>
-			<img src={imageUrl} alt="item" />
-		</Image>
-		<span className="name">{name}</span>
-		<div className="quantity">
-			<Arrow>&#10094;</Arrow> {quantity} <Arrow>&#10095;</Arrow>{' '}
-		</div>
-		<span className="price">{price}</span>
-		<div
-			className="remove-button"
-			role="button"
-			tabIndex={0}
-			onClick={() => removeItems({ name, imageUrl, price, quantity, id })}
-			onKeyDown={() => {}}
-		>
-			&#10005;
-		</div>
-	</Container>
-);
+const CheckoutItem = ({ cartItem, removeItems, decrease, increase }) => {
+	const { name, imageUrl, price, quantity } = cartItem;
+	return (
+		<Container>
+			<Image>
+				<img src={imageUrl} alt="item" />
+			</Image>
+			<span className="name">{name}</span>
+			<div className="quantity">
+				<Arrow onClick={() => decrease(cartItem)}>&#10094;</Arrow>
+				{quantity}
+				<Arrow onClick={() => increase(cartItem)}>&#10095;</Arrow>
+			</div>
+			<span className="price">{price}</span>
+			<div
+				className="remove-button"
+				role="button"
+				tabIndex={0}
+				onClick={() => removeItems(cartItem)}
+				onKeyDown={() => {}}
+			>
+				&#10005;
+			</div>
+		</Container>
+	);
+};
 
 export default CheckoutItem;

@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { removeItemsFromCart } from '../../redux/cart/actions';
+import {
+	removeItemsFromCart,
+	decreaseItems,
+	increaseItems
+} from '../../redux/cart/actions';
 
 import CheckoutItem from '../../components/CheckoutItems';
 
@@ -49,7 +53,7 @@ const NoItems = styled.p`
 	font-size: 18px;
 `;
 
-const Checkout = ({ cartItems, total, removeItems }) => (
+const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
 	<Container>
 		<Header>
 			<div className="header-block">
@@ -76,6 +80,8 @@ const Checkout = ({ cartItems, total, removeItems }) => (
 					key={`${cartItem.id} ${cartItem.name}`}
 					cartItem={cartItem}
 					removeItems={removeItems}
+					decrease={decrease}
+					increase={increase}
 				/>
 			))
 		)}
@@ -91,7 +97,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-	removeItems: user => dispatch(removeItemsFromCart(user))
+	removeItems: user => dispatch(removeItemsFromCart(user)),
+	decrease: user => dispatch(decreaseItems(user)),
+	increase: user => dispatch(increaseItems(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

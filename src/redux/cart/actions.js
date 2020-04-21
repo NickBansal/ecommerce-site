@@ -13,3 +13,13 @@ export const removeItemsFromCart = cartItems => ({
 	type: cartTypes.REMOVE_FROM_CART,
 	payload: cartItems
 });
+
+export const decreaseItems = cartItems => ({
+	type: cartTypes.DECREASE_ITEMS,
+	payload: cartItems
+});
+
+export const increaseItems = cartItems => ({
+	type: cartTypes.INCREASE_ITEMS,
+	payload: cartItems
+});
