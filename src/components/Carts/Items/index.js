@@ -25,16 +25,16 @@ const Container = styled.div`
 	}
 `;
 
-const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
+const Items = ({ item: { imageUrl, price, name, quantity } }) => (
 	<Container>
 		<img src={imageUrl} alt="item" />
 		<div className="item-details">
 			<span className="name">{name}</span>
 			<span className="price">
-				{quantity} x ${price}
+				{quantity} x £{price}
 			</span>
 		</div>
 	</Container>
 );
 
-export default CartItem;
+export default Items;

@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 
 import CustomButton from '../../CustomButton';
 import Items from '../Items';
+import { selectCartItems } from '../../../redux/cart/selectors';
 
 const Container = styled.div`
 	position: absolute;
-	width: 250px;
+	width: 270px;
 	height: 340px;
 	display: flex;
 	flex-direction: column;
@@ -35,7 +36,10 @@ const CartDropDown = ({ cartItems }) => (
 		<div className="cart-dropdown">
 			<div className="cart-items">
 				{cartItems.map(cartItem => (
-					<Items key={cartItem.id} item={cartItem} />
+					<Items
+						key={`${cartItem.id}${cartItem.name}`}
+						item={cartItem}
+					/>
 				))}
 			</div>
 			<CustomButton>GO TO CHECKOUT</CustomButton>
@@ -44,7 +48,7 @@ const CartDropDown = ({ cartItems }) => (
 );
 
 const mapStateToProps = state => ({
-	cartItems: state.cart.cartItems
+	cartItems: selectCartItems(state)
 });
 
 export default connect(mapStateToProps)(CartDropDown);

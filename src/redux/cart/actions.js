@@ -8,7 +8,3 @@ export const addItemsToCart = cartItem => ({
 	type: cartTypes.ADD_TO_CART,
 	payload: cartItem
 });
-
-export const totalItemsInCart = () => ({
-	type: cartTypes.TOTAL_ITEMS_IN_CART
-});
