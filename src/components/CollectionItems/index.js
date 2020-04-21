@@ -50,7 +50,14 @@ const Footer = styled.div`
 	padding: 10px;
 `;
 
-const CollectionItem = ({ name, price, imageUrl, id, addCartItems }) => (
+const CollectionItem = ({
+	name,
+	price,
+	imageUrl,
+	id,
+	addCartItems,
+	totalItems
+}) => (
 	<Item>
 		<div
 			className="image"

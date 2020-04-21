@@ -9,7 +9,6 @@ export const addItemsToCart = cartItem => ({
 	payload: cartItem
 });
 
-export const removeItemsFromCart = cartItem => ({
-	type: cartTypes.REMOVE_FROM_CART,
-	payload: cartItem
+export const totalItemsInCart = () => ({
+	type: cartTypes.TOTAL_ITEMS_IN_CART
 });

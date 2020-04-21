@@ -29,15 +29,19 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = ({ toggleCart }) => (
+const CartIcon = ({ toggleCart, totalItems }) => (
 	<Container onClick={toggleCart}>
 		<ShoppingIcon className="shopping-icon" />
-		<span className="item-count"> 0 </span>
+		<span className="item-count"> {totalItems} </span>
 	</Container>
 );
+
+const mapStateToProps = state => ({
+	totalItems: state.cart.totalItems
+});
 
 const mapDispatchToProps = dispatch => ({
 	toggleCart: () => dispatch(setCurrentCart())
 });
 
-export default connect(null, mapDispatchToProps)(CartIcon);
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

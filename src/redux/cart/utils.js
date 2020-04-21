@@ -1,4 +1,4 @@
-export default (payload, cartItems) => {
+export const calculateQuanity = (payload, cartItems) => {
 	const newPayload = { ...payload };
 	const newItems = cartItems.slice();
 
