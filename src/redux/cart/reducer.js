@@ -4,7 +4,8 @@ import { calculateQuanity, removeItems } from './utils';
 const INITIAL_STATE = {
 	hidden: false,
 	cartItems: [],
-	totalItems: 0
+	totalItems: 0,
+	totalPrice: 0
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -18,13 +19,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				cartItems: calculateQuanity(action.payload, state.cartItems),
-				totalItems: state.totalItems + 1
+				totalItems: state.totalItems + 1,
+				totalPrice: state.totalPrice + action.payload.price
 			};
 		case cartTypes.REMOVE_FROM_CART:
 			return {
 				...state,
 				cartItems: removeItems(action.payload, state.cartItems),
-				totalItems: state.totalItems - 1
+				totalItems: state.totalItems - 1,
+				totalPrice: state.totalPrice - action.payload.price
 			};
 		default:
 			return state;
