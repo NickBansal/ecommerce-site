@@ -76,7 +76,7 @@ const MenuItem = ({ title, imageUrl, size, history }) => {
 		<Item
 			size={size}
 			imgEffect={imgEffect}
-			onClick={() => history.push(`/${title}`)}
+			onClick={() => history.push(`/shop/${title}`)}
 			onMouseEnter={() => setImageEffect(true)}
 			onMouseLeave={() => setImageEffect(false)}
 		>
