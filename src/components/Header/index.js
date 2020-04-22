@@ -24,8 +24,8 @@ const Container = styled.div`
 	top: 0;
 	left: 0;
 	background: lightgrey;
-	opacity: 0.7;
-	padding: 10px;
+	opacity: 0.8;
+	padding: 10px 20px;
 `;
 
 const LogoStyled = styled(Logo)`
@@ -47,7 +47,7 @@ const Options = styled.div`
 	}
 `;
 
-const Header = ({ currentUser, setUser, isDropdownHidden }) => (
+const Header = ({ currentUser, isDropdownHidden, dispatch }) => (
 	<>
 		<Container>
 			<Link to="/">
@@ -68,7 +68,7 @@ const Header = ({ currentUser, setUser, isDropdownHidden }) => (
 						role="button"
 						onClick={() => {
 							auth.signOut();
-							setUser(null);
+							dispatch(setCurrentUser(null));
 						}}
 					>
 						SIGN OUT
@@ -90,8 +90,4 @@ const mapStateToProps = createStructuredSelector({
 	isDropdownHidden: selectCartHidden
 });
 
-const mapDispatchToProps = dispatch => ({
-	setUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);

@@ -16,10 +16,6 @@ const Container = styled.div`
 		width: 23%;
 	}
 
-	.quantity {
-		padding-left: 20px;
-	}
-
 	.remove-button {
 		padding-left: 12px;
 		cursor: pointer;
@@ -60,7 +56,7 @@ const CheckoutItem = ({ cartItem, removeItems, decrease, increase }) => {
 				{quantity}
 				<Arrow onClick={() => increase(cartItem)}>&#10095;</Arrow>
 			</div>
-			<span className="price">{price}</span>
+			<span className="price">£{price}</span>
 			<div
 				className="remove-button"
 				role="button"

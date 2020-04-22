@@ -18,7 +18,7 @@ import {
 
 const Container = styled.div`
 	width: 55%;
-	min-height: 90vh;
+	min-height: 80vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
