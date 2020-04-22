@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import MenuItem from './MenuItem';
-import options from './options';
+import OPTIONS from '../../constants/options';
 
 const Container = styled.div`
 	display: flex;
@@ -20,7 +20,7 @@ const DirMenu = styled.div`
 const HomePage = () => (
 	<Container>
 		<DirMenu>
-			{options.map(({ id, ...rest }) => (
+			{OPTIONS.map(({ id, ...rest }) => (
 				<MenuItem key={id} {...rest} />
 			))}
 		</DirMenu>
