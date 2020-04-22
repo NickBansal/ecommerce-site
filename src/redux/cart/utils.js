@@ -57,15 +57,13 @@ export const decreasePriceAndAmount = (
 	{ totalItems, totalPrice },
 	{ quantity, price }
 ) => {
-	if (quantity > 1) {
-		return {
-			totalItems: totalItems - 1,
-			totalPrice: totalPrice - price
-		};
-	}
-
-	return {
-		totalItems,
-		totalPrice
-	};
+	return quantity > 1
+		? {
+				totalItems: totalItems - 1,
+				totalPrice: totalPrice - price
+		  }
+		: {
+				totalItems,
+				totalPrice
+		  };
 };

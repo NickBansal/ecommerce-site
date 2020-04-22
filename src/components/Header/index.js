@@ -18,6 +18,14 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	background: lightgrey;
+	opacity: 0.7;
+	padding: 10px;
 `;
 
 const LogoStyled = styled(Logo)`
@@ -40,39 +48,41 @@ const Options = styled.div`
 `;
 
 const Header = ({ currentUser, setUser, isDropdownHidden }) => (
-	<Container>
-		<Link to="/">
-			<LogoStyled />
-		</Link>
-		<Options>
-			<Link to="/shop" className="option">
-				SHOP
+	<>
+		<Container>
+			<Link to="/">
+				<LogoStyled />
 			</Link>
-			<Link to="/contact" className="option">
-				CONTACT
-			</Link>
-			{currentUser ? (
-				// eslint-disable-next-line jsx-a11y/click-events-have-key-events
-				<div
-					className="option"
-					tabIndex="0"
-					role="button"
-					onClick={() => {
-						auth.signOut();
-						setUser(null);
-					}}
-				>
-					SIGN OUT
-				</div>
-			) : (
-				<Link to="/signin" className="option">
-					SIGN IN
+			<Options>
+				<Link to="/shop" className="option">
+					SHOP
 				</Link>
-			)}
-			<CartIcon />
-		</Options>
+				<Link to="/contact" className="option">
+					CONTACT
+				</Link>
+				{currentUser ? (
+					// eslint-disable-next-line jsx-a11y/click-events-have-key-events
+					<div
+						className="option"
+						tabIndex="0"
+						role="button"
+						onClick={() => {
+							auth.signOut();
+							setUser(null);
+						}}
+					>
+						SIGN OUT
+					</div>
+				) : (
+					<Link to="/signin" className="option">
+						SIGN IN
+					</Link>
+				)}
+				<CartIcon />
+			</Options>
+		</Container>
 		{isDropdownHidden && <CartDropDown />}
-	</Container>
+	</>
 );
 
 const mapStateToProps = createStructuredSelector({

@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   body {
-    margin: 0;
+    margin: 80px 0 0 0;
     font-family: 'Open Sans Condensed';
     padding: 20px 40px;
   }
