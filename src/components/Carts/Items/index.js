@@ -25,7 +25,7 @@ const Container = styled.div`
 	}
 `;
 
-const Items = ({ item: { imageUrl, price, name, quantity } }) => (
+const CartItems = ({ item: { imageUrl, price, name, quantity } }) => (
 	<Container>
 		<img src={imageUrl} alt="item" />
 		<div className="item-details">
@@ -37,4 +37,4 @@ const Items = ({ item: { imageUrl, price, name, quantity } }) => (
 	</Container>
 );
 
-export default Items;
+export default CartItems;

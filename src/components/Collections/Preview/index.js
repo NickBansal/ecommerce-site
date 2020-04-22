@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import CollectItems from '../Items';
+import CollectionItems from '../Items';
 
 const Preview = styled.div`
 	display: flex;
@@ -31,7 +31,7 @@ const CollectionPreview = ({ title, items, routeName }) => (
 		</Link>
 		<div className="preview">
 			{items.slice(0, 4).map(({ id, ...rest }) => (
-				<CollectItems key={id} id={id} {...rest} />
+				<CollectionItems key={id} id={id} {...rest} />
 			))}
 		</div>
 	</Preview>

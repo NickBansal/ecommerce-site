@@ -70,13 +70,13 @@ const Item = styled.div`
 	}
 `;
 
-const MenuItem = ({ title, imageUrl, size, history }) => {
+const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
 	const [imgEffect, setImageEffect] = useState(false);
 	return (
 		<Item
 			size={size}
 			imgEffect={imgEffect}
-			onClick={() => history.push(`/shop/${title}`)}
+			onClick={() => history.push(linkUrl)}
 			onMouseEnter={() => setImageEffect(true)}
 			onMouseLeave={() => setImageEffect(false)}
 		>

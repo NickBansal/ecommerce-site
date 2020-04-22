@@ -9,7 +9,7 @@ import {
 	increaseItems
 } from '../../redux/cart/actions';
 
-import CheckoutItem from '../../components/CheckoutItems';
+import CheckoutItems from '../../components/CheckoutItems';
 
 import {
 	selectCartItems,
@@ -76,7 +76,7 @@ const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
 			<NoItems>There are no items here to buy</NoItems>
 		) : (
 			cartItems.map(cartItem => (
-				<CheckoutItem
+				<CheckoutItems
 					key={`${cartItem.id} ${cartItem.name}`}
 					cartItem={cartItem}
 					removeItems={removeItems}

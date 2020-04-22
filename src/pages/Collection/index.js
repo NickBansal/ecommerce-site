@@ -8,30 +8,37 @@ import CollectionItems from '../../components/Collections/Items';
 
 const Preview = styled.div`
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+	flex-direction: column;
+
+	.title {
+		font-size: 38px;
+		margin: 0 auto 30px;
+	}
+
+	.items {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-gap: 10px;
+
+		& .collection-item {
+			margin-bottom: 30px;
+		}
+	}
 `;
 
-const Title = styled.h2`
-	font-size: 28px;
-	margin-bottom: 25px;
-`;
-
-const Collection = ({
-	match: {
-		params: { collectionId }
-	},
-	shopData
-}) => (
-	<>
-		<Title>{collectionId.toUpperCase()}</Title>
+const Collection = ({ shopData }) => {
+	const { items, title } = shopData;
+	return (
 		<Preview>
-			{shopData.items.map(({ id, ...rest }) => (
-				<CollectionItems key={id} id={id} {...rest} />
-			))}
+			<h2 className="title">{title.toUpperCase()}</h2>
+			<div className="items">
+				{items.map(({ id, ...rest }) => (
+					<CollectionItems key={id} id={id} {...rest} />
+				))}
+			</div>
 		</Preview>
-	</>
-);
+	);
+};
 
 const mapStateToProps = (state, ownProps) => ({
 	shopData: selectCollection(ownProps.match.params.collectionId)(state)

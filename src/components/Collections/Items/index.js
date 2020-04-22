@@ -6,7 +6,7 @@ import { addItemsToCart } from '../../../redux/cart/actions';
 import CustomButton from '../../CustomButton';
 
 const Item = styled.div`
-	width: 22%;
+	width: 22vw;
 	display: flex;
 	flex-direction: column;
 	height: 350px;
@@ -51,7 +51,7 @@ const Footer = styled.div`
 	padding: 10px;
 `;
 
-const CollectionItem = ({ name, price, imageUrl, id, addCartItems }) => (
+const CollectionItems = ({ name, price, imageUrl, id, dispatch }) => (
 	<Item>
 		<div
 			className="image"
@@ -61,12 +61,14 @@ const CollectionItem = ({ name, price, imageUrl, id, addCartItems }) => (
 		/>
 		<CustomButton
 			onClick={() => {
-				addCartItems({
-					name,
-					price,
-					imageUrl,
-					id
-				});
+				dispatch(
+					addItemsToCart({
+						name,
+						price,
+						imageUrl,
+						id
+					})
+				);
 			}}
 			className="custom-button"
 			inverted
@@ -81,8 +83,4 @@ const CollectionItem = ({ name, price, imageUrl, id, addCartItems }) => (
 	</Item>
 );
 
-const mapDispatchToProps = dispatch => ({
-	addCartItems: cartItems => dispatch(addItemsToCart(cartItems))
-});
-
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default connect()(CollectionItems);

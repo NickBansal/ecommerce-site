@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import CustomButton from '../../CustomButton';
-import Items from '../Items';
+import CartItems from '../Items';
 
 import { selectCartItems } from '../../../redux/cart/selectors';
 import { toggleCurrentCart } from '../../../redux/cart/actions';
@@ -47,7 +47,7 @@ const CartDropDown = ({ cartItems, history, dispatch }) => (
 			<div className="cart-dropdown">
 				<div className="cart-items">
 					{cartItems.map(cartItem => (
-						<Items
+						<CartItems
 							key={`${cartItem.id}${cartItem.name}`}
 							item={cartItem}
 						/>

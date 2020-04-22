@@ -43,7 +43,7 @@ const Image = styled.div`
 	}
 `;
 
-const CheckoutItem = ({ cartItem, removeItems, decrease, increase }) => {
+const CheckoutItems = ({ cartItem, removeItems, decrease, increase }) => {
 	const { name, imageUrl, price, quantity } = cartItem;
 	return (
 		<Container>
@@ -70,4 +70,4 @@ const CheckoutItem = ({ cartItem, removeItems, decrease, increase }) => {
 	);
 };
 
-export default CheckoutItem;
+export default CheckoutItems;
