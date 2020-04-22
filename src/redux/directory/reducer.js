@@ -6,6 +6,11 @@ const INITIAL_STATE = {
 	sections: OPTIONS
 };
 
-const directoryReducer = () => INITIAL_STATE;
+const directoryReducer = (state = INITIAL_STATE, actions) => {
+	switch (actions.type) {
+		default:
+			return state;
+	}
+};
 
 export default directoryReducer;

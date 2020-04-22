@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectCurrentUser } from '../redux/user/selectors';
-import { HomePage, Hats, Shop, SignIn, Checkout } from '../pages';
+import { HomePage, Shop, SignIn, Checkout } from '../pages';
 
 const Routes = ({ currentUser }) => (
 	<Switch>
 		<Route exact path="/" component={HomePage} />
-		<Route path="/hats" component={Hats} />
 		<Route path="/shop" component={Shop} />
 		<Route
 			exact

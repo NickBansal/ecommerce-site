@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CollectItems from '../CollectionItems';
+import CollectItems from '../Items';
 
 const Preview = styled.div`
 	display: flex;
