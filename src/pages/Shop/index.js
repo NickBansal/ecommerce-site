@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import CollectionPreview from '../../components/CollectionPreview';
 
-import selectDirectory from '../../redux/directory/selectors';
+import { selectData } from '../../redux/directory/selectors';
 
 const ShopPage = ({ shopData }) => (
 	<div>
@@ -15,7 +15,7 @@ const ShopPage = ({ shopData }) => (
 );
 
 const mapStateToProps = createStructuredSelector({
-	shopData: selectDirectory
+	shopData: selectData
 });
 
 export default connect(mapStateToProps)(ShopPage);

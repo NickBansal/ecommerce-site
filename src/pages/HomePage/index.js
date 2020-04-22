@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import MenuItem from './MenuItem';
-import OPTIONS from '../../constants/options';
+
+import { selectSections } from '../../redux/directory/selectors';
 
 const Container = styled.div`
 	display: flex;
@@ -17,14 +20,18 @@ const DirMenu = styled.div`
 	justify-content: space-between;
 `;
 
-const HomePage = () => (
+const HomePage = ({ sections }) => (
 	<Container>
 		<DirMenu>
-			{OPTIONS.map(({ id, ...rest }) => (
+			{sections.map(({ id, ...rest }) => (
 				<MenuItem key={id} {...rest} />
 			))}
 		</DirMenu>
 	</Container>
 );
 
-export default HomePage;
+const mapStateToProps = createStructuredSelector({
+	sections: selectSections
+});
+
+export default connect(mapStateToProps)(HomePage);
