@@ -11,7 +11,7 @@ import { selectCartItems } from '../../../redux/cart/selectors';
 import { toggleCurrentCart } from '../../../redux/cart/actions';
 
 const Container = styled.div`
-	position: absolute;
+	position: fixed;
 	width: 270px;
 	height: 340px;
 	display: flex;
@@ -20,7 +20,7 @@ const Container = styled.div`
 	border: 1px solid black;
 	background-color: white;
 	top: 84px;
-	right: 47px;
+	right: 27px;
 	z-index: 5;
 
 	.cart-items {

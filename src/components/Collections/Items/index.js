@@ -13,6 +13,7 @@ const Item = styled.div`
 	align-items: center;
 	position: relative;
 	box-shadow: 0px 0px 3px grey;
+	margin-bottom: 20px;
 
 	.image {
 		width: 100%;

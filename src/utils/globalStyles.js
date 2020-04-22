@@ -9,7 +9,8 @@ export default createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: black
+    color: black;
+		width: fit-content;
   }
 
   * {
