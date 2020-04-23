@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addItemsToCart } from '../../../redux/cart/actions';
+import { addItemsToCart } from '../../redux/cart/actions';
 
-import CustomButton from '../../CustomButton';
+import CustomButton from '../CustomButton';
 
 const Item = styled.div`
 	width: 22vw;
@@ -13,7 +13,6 @@ const Item = styled.div`
 	align-items: center;
 	position: relative;
 	box-shadow: 0px 0px 3px grey;
-	margin-bottom: 20px;
 
 	.image {
 		width: 100%;

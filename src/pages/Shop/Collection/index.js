@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { selectCollection } from '../../redux/directory/selectors';
+import { selectCollection } from '../../../redux/directory/selectors';
 
-import CollectionItems from '../../components/Collections/Items';
+import CollectionItems from '../../../components/Collections/Preview/Items';
 
 const Preview = styled.div`
 	display: flex;
@@ -18,7 +18,7 @@ const Preview = styled.div`
 	.items {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
-		grid-gap: 10px;
+		grid-gap: 30px;
 
 		& .collection-item {
 			margin-bottom: 30px;
