@@ -13,16 +13,6 @@ const Item = styled.div`
 	margin: 0 7.5px 15px;
 	overflow: hidden;
 
-	.background-image {
-		width: 100%;
-		height: 100%;
-		background-position: center;
-		background-size: cover;
-		transform: scale(${({ imgEffect }) => (imgEffect ? '1.1' : '1')});
-
-		transition: transform 2s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-	}
-
 	.content {
 		height: 90px;
 		padding: 0 25px;
@@ -70,20 +60,26 @@ const Item = styled.div`
 	}
 `;
 
+const BackgroundImage = styled.div`
+	background-image: url(${({ image }) => image});
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-size: cover;
+	transform: scale(${({ imgEffect }) => (imgEffect ? '1.1' : '1')});
+	transition: transform 2s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+`;
+
 const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
 	const [imgEffect, setImageEffect] = useState(false);
 	return (
 		<Item
 			size={size}
-			imgEffect={imgEffect}
 			onClick={() => history.push(linkUrl)}
 			onMouseEnter={() => setImageEffect(true)}
 			onMouseLeave={() => setImageEffect(false)}
 		>
-			<div
-				className="background-image"
-				style={{ backgroundImage: `url(${imageUrl})` }}
-			/>
+			<BackgroundImage image={imageUrl} imgEffect={imgEffect} />
 			<div className="content">
 				<div className="title">{title.toUpperCase()}</div>
 				<span className="subtitle">SHOP NOW</span>

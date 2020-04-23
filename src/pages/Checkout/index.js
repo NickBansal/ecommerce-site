@@ -42,14 +42,14 @@ const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	border-bottom: 1px solid darkgrey;
+`;
 
-	.header-block {
-		text-transform: capitalize;
-		width: 23%;
+const HeaderBlock = styled.div`
+	text-transform: capitalize;
+	width: 23%;
 
-		&:last-child {
-			width: 8%;
-		}
+	&:last-child {
+		width: 8%;
 	}
 `;
 
@@ -68,21 +68,11 @@ const CardDetails = styled.div`
 const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
 	<Container>
 		<Header>
-			<div className="header-block">
-				<span>Product</span>
-			</div>
-			<div className="header-block">
-				<span>Description</span>
-			</div>
-			<div className="header-block">
-				<span>Quantity</span>
-			</div>
-			<div className="header-block">
-				<span>Price</span>
-			</div>
-			<div className="header-block">
-				<span>Remove</span>
-			</div>
+			<HeaderBlock>Product</HeaderBlock>
+			<HeaderBlock>Description</HeaderBlock>
+			<HeaderBlock>Quantity</HeaderBlock>
+			<HeaderBlock>Price</HeaderBlock>
+			<HeaderBlock>Remove</HeaderBlock>
 		</Header>
 		{!cartItems.length ? (
 			<NoItems>There are no items here to buy</NoItems>
