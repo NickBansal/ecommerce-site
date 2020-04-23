@@ -50,6 +50,8 @@ const cartReducer = (state = INITIAL_STATE, action) => {
 				...increasePriceAndAmount(state, action.payload.price),
 				cartItems: increaseItems(action.payload, state.cartItems)
 			};
+		case cartTypes.CLEAR_CART:
+			return INITIAL_STATE;
 		default:
 			return state;
 	}
