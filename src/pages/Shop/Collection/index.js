@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { selectCollection } from '../../../redux/directory/selectors';
 
-import CollectionItems from '../../../components/Collections/Preview/Items';
+import CollectionItems from '../../../components/CollectionItems';
 
 const Preview = styled.div`
 	display: flex;

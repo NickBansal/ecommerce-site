@@ -10,6 +10,7 @@ import {
 } from '../../redux/cart/actions';
 
 import CheckoutItems from '../../components/CheckoutItems';
+import StripeButton from '../../components/StripeButton';
 
 import {
 	selectCartItems,
@@ -22,12 +23,16 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 50px auto 0;
+	margin: 50px auto;
 
 	.total {
-		margin-top: 30px;
+		margin-top: 10px;
 		margin-left: auto;
 		font-size: 36px;
+	}
+
+	button {
+		margin-left: auto;
 	}
 `;
 
@@ -51,6 +56,13 @@ const Header = styled.div`
 const NoItems = styled.p`
 	text-align: center;
 	font-size: 18px;
+`;
+
+const CardDetails = styled.div`
+	width: 100%;
+	text-align: center;
+	color: red;
+	margin-top: 10px;
 `;
 
 const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
@@ -86,7 +98,15 @@ const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
 			))
 		)}
 		{Boolean(cartItems.length) && (
-			<div className="total">TOTAL: £{total}</div>
+			<>
+				<CardDetails>
+					*Please use the following card details when paying
+					<br />
+					4242 4242 4242 4242 - 01/30 - 123
+				</CardDetails>
+				<div className="total">TOTAL: £{total}</div>
+				<StripeButton className="stripe" price={total} />
+			</>
 		)}
 	</Container>
 );

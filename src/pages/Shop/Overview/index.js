@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectCollectionForPreview } from '../../../redux/directory/selectors';
 
-import CollectionItems from '../../../components/Collections/Preview/Items';
+import CollectionItems from '../../../components/CollectionItems';
 
 const Preview = styled.div`
 	display: flex;
