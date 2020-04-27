@@ -6,11 +6,13 @@ import Routes from './routing';
 import Header from './components/Header';
 
 import { setCurrentUser } from './redux/user/actions';
+import { selectCollectionForPreview } from './redux/directory/selectors';
 
 import { auth } from './firebase/utils';
 import createUserProfileDocument from './firebase/createUser';
+import addCollectionAndDocs from './firebase/addCollectionAndDocs';
 
-const App = ({ setUser }) => {
+const App = ({ setUser, collectionsArray }) => {
 	useEffect(() => {
 		let unsubscribeFromAuth = null;
 		unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -26,6 +28,8 @@ const App = ({ setUser }) => {
 			} else {
 				setCurrentUser(userAuth);
 			}
+
+			addCollectionAndDocs('collections', collectionsArray);
 		});
 
 		return () => unsubscribeFromAuth();
@@ -42,7 +46,8 @@ const App = ({ setUser }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	setUser: user => dispatch(setCurrentUser(user))
+	setUser: user => dispatch(setCurrentUser(user)),
+	collectionsArray: user => dispatch(selectCollectionForPreview(user))
 });
 
 export default connect(null, mapDispatchToProps)(App);
