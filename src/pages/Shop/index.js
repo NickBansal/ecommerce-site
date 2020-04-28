@@ -17,16 +17,27 @@ const ShopPage = ({ match, dispatch }) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		let unsubscribeFromSnapshot = null;
 		const collectionRef = firestore.collection('collections');
 
-		unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+		// |------------- SUBSCRIBE TO LIVE DATA -------------|
+
+		// let unsubscribeFromSnapshot = null;
+		// unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+		// 	const dataCollection = convertCollectionsToMap(snapshot);
+		// 	dispatch(setCurrentData(dataCollection));
+		// 	setLoading(false);
+		// });
+
+		// return () => unsubscribeFromSnapshot();
+
+		// |------------ UNSUBSCRIBE TO LIVE DATA ------------|
+
+		collectionRef.get().then(snapshot => {
 			const dataCollection = convertCollectionsToMap(snapshot);
 			dispatch(setCurrentData(dataCollection));
 			setLoading(false);
 		});
 
-		return () => unsubscribeFromSnapshot();
 		// eslint-disable-next-line
 	}, []);
 
