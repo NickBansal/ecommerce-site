@@ -1,6 +1,15 @@
 import { firestore } from './utils';
 
-export default (collectionKey, objectsToAdd) => {
+export default async (collectionKey, objectsToAdd) => {
 	const collectionRef = firestore.collection(collectionKey);
-	console.log(collectionRef);
+
+	const batch = firestore.batch();
+
+	objectsToAdd.forEach(item => {
+		const newDocRef = collectionRef.doc();
+
+		batch.set(newDocRef, item);
+	});
+
+	return batch.commit();
 };

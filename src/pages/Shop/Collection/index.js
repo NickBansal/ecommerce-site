@@ -28,6 +28,7 @@ const Preview = styled.div`
 
 const Collection = ({ shopData }) => {
 	const { items, title } = shopData;
+
 	return (
 		<Preview>
 			<h2 className="title">{title.toUpperCase()}</h2>

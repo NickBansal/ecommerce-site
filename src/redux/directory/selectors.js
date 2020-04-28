@@ -10,12 +10,12 @@ export const selectSections = createSelector(
 );
 
 export const selectCollection = collectionUrlParam =>
-	createSelector(
-		[selectData],
-		collections => collections[collectionUrlParam]
+	createSelector([selectData], collections =>
+		collections ? collections[collectionUrlParam] : null
 	);
 
 export const selectCollectionForPreview = createSelector(
 	[selectData],
-	collections => Object.keys(collections).map(key => collections[key])
+	collections =>
+		collections ? Object.keys(collections).map(key => collections[key]) : []
 );
