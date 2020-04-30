@@ -11,7 +11,6 @@ const Container = styled.div`
 	align-items: center;
 
 	.name,
-	.quantity,
 	.price {
 		width: 23%;
 	}
@@ -21,16 +20,32 @@ const Container = styled.div`
 		cursor: pointer;
 		outline: none;
 	}
+
+	.quantity {
+		width: 23%;
+
+		&::selection {
+			color: none;
+			background: none;
+		}
+	}
 `;
 
 const Arrow = styled.span`
 	padding: 5px;
-	cursor: pointer;
+	cursor: ${({ notAllowed }) => (notAllowed ? 'not-allowed' : 'pointer')}
 	color: lightgrey;
+	pointer-events: 
 
 	&:hover {
-		color: black;
+		color: ${({ notAllowed }) => (notAllowed ? 'none' : 'black')};
 	}
+
+	&::selection {
+		color: none;
+		background: none;
+	}
+	
 `;
 
 const Image = styled.div`
@@ -52,7 +67,12 @@ const CheckoutItems = ({ cartItem, removeItems, decrease, increase }) => {
 			</Image>
 			<span className="name">{name}</span>
 			<div className="quantity">
-				<Arrow onClick={() => decrease(cartItem)}>&#10094;</Arrow>
+				<Arrow
+					onClick={() => decrease(cartItem)}
+					notAllowed={quantity === 1}
+				>
+					&#10094;
+				</Arrow>
 				{quantity}
 				<Arrow onClick={() => increase(cartItem)}>&#10095;</Arrow>
 			</div>
