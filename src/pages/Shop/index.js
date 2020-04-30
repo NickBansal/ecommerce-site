@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { fetchCollectionsStartAsync } from '../../redux/directory/actions';
-import { selectIsCollectionFetching } from '../../redux/directory/selectors';
+import { selectIsCollectionLoaded } from '../../redux/directory/selectors';
 
 import Overview from './Overview';
 import Collection from './Collection';
@@ -13,23 +13,9 @@ import WithSpinner from '../../components/WithSpinner';
 const OverViewLoading = WithSpinner(Overview);
 const CollectionLoading = WithSpinner(Collection);
 
-const ShopPage = ({ match, fetchCollections, isFetching }) => {
-	useEffect(() => {
-		fetchCollections();
-
-		// |------------- SUBSCRIBE TO LIVE DATA -------------|
-		// let unsubscribeFromSnapshot = null;
-		// const collectionRef = firestore.collection('collections');
-		// unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
-		// 	const dataCollection = convertCollectionsToMap(snapshot);
-		// 	dispatch(setCurrentData(dataCollection));
-		// 	setLoading(false);
-		// });
-		// return () => unsubscribeFromSnapshot();
-		// |------------ UNSUBSCRIBE TO LIVE DATA ------------|
-
-		// eslint-disable-next-line
-	}, []);
+const ShopPage = ({ match, fetchCollections, isLoading }) => {
+	// eslint-disable-next-line
+	useEffect(() => fetchCollections(), []);
 
 	return (
 		<Switch>
@@ -37,13 +23,13 @@ const ShopPage = ({ match, fetchCollections, isFetching }) => {
 				exact
 				path={`${match.path}`}
 				render={props => (
-					<OverViewLoading isLoading={isFetching} {...props} />
+					<OverViewLoading isLoading={!isLoading} {...props} />
 				)}
 			/>
 			<Route
 				path={`${match.path}/:collectionId`}
 				render={props => (
-					<CollectionLoading isLoading={isFetching} {...props} />
+					<CollectionLoading isLoading={!isLoading} {...props} />
 				)}
 			/>
 		</Switch>
@@ -51,7 +37,7 @@ const ShopPage = ({ match, fetchCollections, isFetching }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	isFetching: selectIsCollectionFetching
+	isLoading: selectIsCollectionLoaded
 });
 
 const mapDispatchToProps = dispatch => ({
