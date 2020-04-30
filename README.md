@@ -5,4 +5,5 @@
 * Stripe payments
 * HOC
 * React-router-dom
+* GraphQL
 
