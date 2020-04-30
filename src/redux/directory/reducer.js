@@ -5,7 +5,7 @@ import directoryTypes from './types';
 const INITIAL_STATE = {
 	data: null,
 	sections: OPTIONS,
-	isFetching: false,
+	isFetching: true,
 	errorMessage: undefined
 };
 
