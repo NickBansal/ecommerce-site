@@ -22,5 +22,5 @@ export const selectCollectionForPreview = createSelector(
 
 export const selectIsCollectionLoaded = createSelector(
 	[selectDirectory],
-	collections => Boolean(collections.data)
+	collections => !collections.data
 );

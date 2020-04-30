@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addItemsToCart } from '../../redux/cart/actions';
+import { addItemsToCart } from '../../../redux/cart/actions';
 
-import CustomButton from '../CustomButton';
+import CustomButton from '../../CustomButton';
 
 const Item = styled.div`
 	width: 22vw;
