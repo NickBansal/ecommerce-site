@@ -10,6 +10,10 @@ const INITIAL_STATE = {
 
 const directoryReducer = (state = INITIAL_STATE, actions) => {
 	switch (actions.type) {
+		case directoryTypes.FETCH_COLLECTIONS_START:
+			return {
+				...state
+			};
 		case directoryTypes.FETCH_COLLECTIONS_SUCCESS:
 			return {
 				...state,

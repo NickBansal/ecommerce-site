@@ -2,6 +2,10 @@ import directoryTypes from './types';
 import { firestore } from '../../firebase/utils';
 import convertCollectionsToMap from '../../firebase/convertCollectionsToMap';
 
+export const fetchCollectionsStart = () => ({
+	type: directoryTypes.FETCH_COLLECTIONS_START
+});
+
 export const fetchCollectionsSuccess = data => ({
 	type: directoryTypes.FETCH_COLLECTIONS_SUCCESS,
 	payload: data
