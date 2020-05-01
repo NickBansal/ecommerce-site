@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { setCurrentUser } from '../../redux/user/actions';
+import setCurrentUser from '../../redux/user/actions';
 import { selectCurrentUser } from '../../redux/user/selectors';
 import { selectCartHidden } from '../../redux/cart/selectors';
 

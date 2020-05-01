@@ -1,8 +1,6 @@
 import userTypes from './types';
 
-export const setCurrentUser = user => ({
+export default user => ({
 	type: userTypes.SET_CURRENT_USER,
 	payload: user
 });
-
-export const user = () => {};
