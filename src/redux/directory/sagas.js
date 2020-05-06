@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { firestore } from '../../firebase/utils';
 import convertCollectionsToMap from '../../firebase/convertCollectionsToMap';
 
@@ -22,4 +22,8 @@ export function* fetchCollectionsStart() {
 		directoryTypes.FETCH_COLLECTIONS_START,
 		fetchCollectionsAsync
 	);
+}
+
+export function* directorySagas() {
+	yield all([call(fetchCollectionsStart)]);
 }
