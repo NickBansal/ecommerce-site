@@ -10,8 +10,10 @@ import {
 } from '../../components/Collections/Containers';
 
 const ShopPage = ({ match, fetchCollections }) => {
-	// eslint-disable-next-line
-	useEffect(() => fetchCollections(), []);
+	useEffect(() => {
+		fetchCollections();
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<Switch>
