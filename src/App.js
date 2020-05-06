@@ -5,7 +5,7 @@ import GlobalStyle from './utils/globalStyles';
 import Routes from './routing';
 import Header from './components/Header';
 
-import setCurrentUser from './redux/user/actions';
+import { setCurrentUser } from './redux/user/actions';
 
 import { auth } from './firebase/utils';
 import createUserProfileDocument from './firebase/createUser';

@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import setCurrentUser from '../../redux/user/actions';
+import { signOutStart } from '../../redux/user/actions';
 import { selectCurrentUser } from '../../redux/user/selectors';
 import { selectCartHidden } from '../../redux/cart/selectors';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import { auth } from '../../firebase/utils';
 
 import CartIcon from '../Carts/Icon';
 import CartDropDown from '../Carts/DropDown';
@@ -47,7 +46,7 @@ const Options = styled.div`
 	}
 `;
 
-const Header = ({ currentUser, isDropdownHidden, dispatch }) => (
+const Header = ({ currentUser, isDropdownHidden, signOut }) => (
 	<>
 		<Container>
 			<Link to="/">
@@ -66,10 +65,7 @@ const Header = ({ currentUser, isDropdownHidden, dispatch }) => (
 						className="option"
 						tabIndex="0"
 						role="button"
-						onClick={() => {
-							auth.signOut();
-							dispatch(setCurrentUser(null));
-						}}
+						onClick={signOut}
 					>
 						SIGN OUT
 					</div>
@@ -90,4 +86,8 @@ const mapStateToProps = createStructuredSelector({
 	isDropdownHidden: selectCartHidden
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+	signOut: () => dispatch(signOutStart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
 import FormError from '../Error';
 
-import { auth, signInWithGoogle } from '../../../firebase/utils';
+import { auth } from '../../../firebase/utils';
+
+import { googleSignInStart } from '../../../redux/user/actions';
 
 const Container = styled.div`
 	width: 380px;
@@ -19,7 +22,7 @@ const Buttons = styled.div`
 	justify-content: space-between;
 `;
 
-const SignInForm = () => {
+const SignInForm = ({ googleSignInToStart }) => {
 	const [state, setState] = useState({
 		email: '',
 		password: ''
@@ -79,7 +82,11 @@ const SignInForm = () => {
 				{error && <FormError>{error.message}</FormError>}
 				<Buttons>
 					<CustomButton type="submit"> SIGN IN </CustomButton>
-					<CustomButton onClick={signInWithGoogle} isGoogle>
+					<CustomButton
+						type="button"
+						onClick={googleSignInToStart}
+						isGoogle
+					>
 						{' '}
 						SIGN IN WITH GOOGLE{' '}
 					</CustomButton>
@@ -89,4 +96,8 @@ const SignInForm = () => {
 	);
 };
 
-export default SignInForm;
+const mapDispatchToProps = dispatch => ({
+	googleSignInToStart: () => dispatch(googleSignInStart())
+});
+
+export default connect(null, mapDispatchToProps)(SignInForm);
