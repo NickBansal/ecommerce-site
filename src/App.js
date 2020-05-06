@@ -1,33 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import GlobalStyle from './utils/globalStyles';
 import Routes from './routing';
 import Header from './components/Header';
 
-const App = () => {
-	// useEffect(() => {
-	// let unsubscribeFromAuth = null;
-	// unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-	// 	const userRef = await createUserProfileDocument(userAuth);
+import { checkUserSession } from './redux/user/actions';
+import { selectCurrentUser } from './redux/user/selectors';
 
-	// 	if (userAuth) {
-	// 		userRef.onSnapshot(snapShot => {
-	// 			dispatch(
-	// 				setCurrentUser({
-	// 					id: snapShot.id,
-	// 					...snapShot.data()
-	// 				})
-	// 			);
-	// 		});
-	// 	} else {
-	// 		setCurrentUser(userAuth);
-	// 	}
-	// });
-
-	// return () => unsubscribeFromAuth();
-	// eslint-disable-next-line
-	// }, []);
+const App = ({ checkUser }) => {
+	useEffect(() => {
+		checkUser();
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div>
@@ -38,4 +24,12 @@ const App = () => {
 	);
 };
 
-export default connect()(App);
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectCurrentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+	checkUser: () => dispatch(checkUserSession())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

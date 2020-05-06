@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
-// import FormError from '../Error';
+import FormError from '../Error';
+
+import { selectErrorMessage } from '../../../redux/user/selectors';
 
 import {
 	googleSignInStart,
@@ -23,7 +26,11 @@ const Buttons = styled.div`
 	justify-content: space-between;
 `;
 
-const SignInForm = ({ googleSignInToStart, emailSignInToStart }) => {
+const SignInForm = ({
+	googleSignInToStart,
+	emailSignInToStart,
+	errorMessage
+}) => {
 	const [state, setState] = useState({
 		email: '',
 		password: ''
@@ -31,9 +38,7 @@ const SignInForm = ({ googleSignInToStart, emailSignInToStart }) => {
 
 	const handleSubmit = async e => {
 		const { email, password } = state;
-
 		e.preventDefault();
-
 		emailSignInToStart(email, password);
 	};
 
@@ -69,7 +74,7 @@ const SignInForm = ({ googleSignInToStart, emailSignInToStart }) => {
 					value={password}
 					required
 				/>
-				{/* {error && <FormError>{error.message}</FormError>} */}
+				{errorMessage && <FormError>{errorMessage.message}</FormError>}
 				<Buttons>
 					<CustomButton type="submit"> SIGN IN </CustomButton>
 					<CustomButton
@@ -86,10 +91,14 @@ const SignInForm = ({ googleSignInToStart, emailSignInToStart }) => {
 	);
 };
 
+const mapStateToProps = createStructuredSelector({
+	errorMessage: selectErrorMessage
+});
+
 const mapDispatchToProps = dispatch => ({
 	googleSignInToStart: () => dispatch(googleSignInStart()),
 	emailSignInToStart: (email, password) =>
 		dispatch(emailSignInStart({ email, password }))
 });
 
-export default connect(null, mapDispatchToProps)(SignInForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInForm);

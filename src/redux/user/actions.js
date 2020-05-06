@@ -31,3 +31,7 @@ export const signOutFailure = error => ({
 	type: userTypes.SIGNOUT_FAILURE,
 	payload: error
 });
+
+export const checkUserSession = () => ({
+	type: userTypes.CHECK_USER_SESSION
+});
