@@ -9,6 +9,21 @@ export const emailSignInStart = emailAndPassword => ({
 	payload: emailAndPassword
 });
 
+export const signUpStart = userCredentials => ({
+	type: userTypes.SIGNUP_START,
+	payload: userCredentials
+});
+
+export const signUpSuccess = ({ user, additionalData }) => ({
+	type: userTypes.SIGNUP_SUCCESS,
+	payload: { user, additionalData }
+});
+
+export const signUpFailure = error => ({
+	type: userTypes.SIGNUP_FAILURE,
+	payload: error
+});
+
 export const signInSuccess = user => ({
 	type: userTypes.SIGNIN_SUCCESS,
 	payload: user

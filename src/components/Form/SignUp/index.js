@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
 import FormError from '../Error';
 
-import { auth } from '../../../firebase/utils';
-import createUserProfileDocument from '../../../firebase/createUser';
+import { signUpStart } from '../../../redux/user/actions';
+
+import { selectSignUpErrorMessage } from '../../../redux/user/selectors';
 
 const Container = styled.div`
 	display: flex;
@@ -26,33 +29,19 @@ const blankForm = {
 	confirmPassword: ''
 };
 
-const SignUp = () => {
+const SignUp = ({ signUp, errorMessage }) => {
 	const [state, setState] = useState(blankForm);
 
-	const [error, setError] = useState(false);
-
-	const handleSubmit = async e => {
+	const handleSubmit = e => {
 		const { displayName, email, password, confirmPassword } = state;
 		e.preventDefault();
 
 		if (password !== confirmPassword) {
 			alert('Password must match');
-			setState(blankForm);
-		} else {
-			try {
-				const { user } = await auth.createUserWithEmailAndPassword(
-					email,
-					password
-				);
-
-				await createUserProfileDocument(user, { displayName });
-
-				setState(blankForm);
-				setError(false);
-			} catch (err) {
-				setError(err);
-			}
+			return;
 		}
+
+		signUp({ displayName, email, password });
 	};
 
 	const handleChange = e => {
@@ -102,11 +91,19 @@ const SignUp = () => {
 					value={confirmPassword}
 					required
 				/>
-				{error && <FormError>{error.message}</FormError>}
+				{errorMessage && <FormError>{errorMessage.message}</FormError>}
 				<CustomButton type="submit"> SIGN UP </CustomButton>
 			</form>
 		</Container>
 	);
 };
 
-export default SignUp;
+const mapStateToProps = createStructuredSelector({
+	errorMessage: selectSignUpErrorMessage
+});
+
+const mapDispatchToProps = dispatch => ({
+	signUp: userCredentials => dispatch(signUpStart(userCredentials))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
