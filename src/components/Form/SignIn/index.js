@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
-import FormError from '../Error';
+// import FormError from '../Error';
 
-import { auth } from '../../../firebase/utils';
-
-import { googleSignInStart } from '../../../redux/user/actions';
+import {
+	googleSignInStart,
+	emailSignInStart
+} from '../../../redux/user/actions';
 
 const Container = styled.div`
 	width: 380px;
@@ -22,29 +23,18 @@ const Buttons = styled.div`
 	justify-content: space-between;
 `;
 
-const SignInForm = ({ googleSignInToStart }) => {
+const SignInForm = ({ googleSignInToStart, emailSignInToStart }) => {
 	const [state, setState] = useState({
 		email: '',
 		password: ''
 	});
-
-	const [error, setError] = useState(false);
 
 	const handleSubmit = async e => {
 		const { email, password } = state;
 
 		e.preventDefault();
 
-		try {
-			await auth.signInWithEmailAndPassword(email, password);
-			setState({
-				email: '',
-				password: ''
-			});
-			setError(false);
-		} catch (err) {
-			setError(err);
-		}
+		emailSignInToStart(email, password);
 	};
 
 	const handleChange = e => {
@@ -79,7 +69,7 @@ const SignInForm = ({ googleSignInToStart }) => {
 					value={password}
 					required
 				/>
-				{error && <FormError>{error.message}</FormError>}
+				{/* {error && <FormError>{error.message}</FormError>} */}
 				<Buttons>
 					<CustomButton type="submit"> SIGN IN </CustomButton>
 					<CustomButton
@@ -97,7 +87,9 @@ const SignInForm = ({ googleSignInToStart }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-	googleSignInToStart: () => dispatch(googleSignInStart())
+	googleSignInToStart: () => dispatch(googleSignInStart()),
+	emailSignInToStart: (email, password) =>
+		dispatch(emailSignInStart({ email, password }))
 });
 
 export default connect(null, mapDispatchToProps)(SignInForm);

@@ -4,6 +4,8 @@ import userTypes from './types';
 import {
 	googleSignInSuccess,
 	googleSignInFailure,
+	emailSignInSuccess,
+	emailSignInFailure,
 	signOutSuccess,
 	signOutFailure
 } from './actions';
@@ -26,6 +28,21 @@ export function* onGoogleSignInStart() {
 	yield takeLatest(userTypes.GOOGLE_SIGNIN_START, signInWithGoogle);
 }
 
+export function* signInWithEmail({ payload: { email, password } }) {
+	try {
+		const { user } = yield auth.signInWithEmailAndPassword(email, password);
+		const userRef = yield call(createUserProfileDocument, user);
+		const snapshot = yield userRef.get();
+		yield put(emailSignInSuccess({ id: snapshot.id, ...snapshot.data() }));
+	} catch (error) {
+		yield put(emailSignInFailure(error));
+	}
+}
+
+export function* onEmailSignInStart() {
+	yield takeLatest(userTypes.EMAIL_SIGNIN_START, signInWithEmail);
+}
+
 export function* signOut() {
 	try {
 		yield auth.signOut();
@@ -40,5 +57,9 @@ export function* onSignOutStart() {
 }
 
 export function* userSagas() {
-	yield all([call(onGoogleSignInStart), call(onSignOutStart)]);
+	yield all([
+		call(onGoogleSignInStart),
+		call(onEmailSignInStart),
+		call(onSignOutStart)
+	]);
 }
