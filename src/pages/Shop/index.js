@@ -4,10 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { fetchCollectionsStart } from '../../redux/directory/actions';
 
-import {
-	OverviewContainer,
-	CollectionsContainer
-} from '../../components/Collections/Containers';
+import Collection from './Collection';
+import Overview from './Overview';
 
 const ShopPage = ({ match }) => {
 	const dispatch = useDispatch();
@@ -19,10 +17,10 @@ const ShopPage = ({ match }) => {
 
 	return (
 		<Switch>
-			<Route exact path={`${match.path}`} component={OverviewContainer} />
+			<Route exact path={`${match.path}`} component={Overview} />
 			<Route
 				path={`${match.path}/:collectionId`}
-				component={CollectionsContainer}
+				component={Collection}
 			/>
 		</Switch>
 	);

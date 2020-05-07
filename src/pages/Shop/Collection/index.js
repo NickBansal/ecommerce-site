@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/Collections/CollectionItems';
+import Loading from '../../../components/Loading';
 
 const Preview = styled.div`
 	display: flex;
@@ -34,11 +35,16 @@ const Preview = styled.div`
 `;
 
 const Collection = ({ match }) => {
-	const shopData = useSelector(
-		state => state.directory.data[match.params.collectionId]
-	);
+	const { collectionId } = match.params;
 
-	const { items, title } = shopData;
+	const shopData = useSelector(state => state.directory.data);
+	const isLoading = useSelector(state => !state.directory.data);
+
+	if (isLoading) {
+		return <Loading />;
+	}
+
+	const { items, title } = shopData[collectionId];
 
 	return (
 		<Preview>
