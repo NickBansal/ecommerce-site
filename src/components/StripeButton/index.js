@@ -1,9 +1,11 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { clearCart } from '../../redux/cart/actions';
 
-const StripeButton = ({ price, dispatch }) => {
+const StripeButton = ({ price }) => {
+	const dispatch = useDispatch();
+
 	const priceForStripe = price * 100;
 	const publishableKey = 'pk_test_CXDPdTpBGh3d5iaS8yHnIdFG00Y0v2XEN0';
 
@@ -29,4 +31,4 @@ const StripeButton = ({ price, dispatch }) => {
 	);
 };
 
-export default connect()(StripeButton);
+export default StripeButton;

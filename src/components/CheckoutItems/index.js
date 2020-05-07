@@ -1,5 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+
+import {
+	removeItemsFromCart,
+	decreaseItems,
+	increaseItems
+} from '../../redux/cart/actions';
 
 const Container = styled.div`
 	width: 100%;
@@ -58,8 +65,11 @@ const Image = styled.div`
 	}
 `;
 
-const CheckoutItems = ({ cartItem, removeItems, decrease, increase }) => {
+const CheckoutItems = ({ cartItem }) => {
 	const { name, imageUrl, price, quantity } = cartItem;
+
+	const dispatch = useDispatch();
+
 	return (
 		<Container>
 			<Image>
@@ -68,20 +78,22 @@ const CheckoutItems = ({ cartItem, removeItems, decrease, increase }) => {
 			<span className="name">{name}</span>
 			<div className="quantity">
 				<Arrow
-					onClick={() => decrease(cartItem)}
+					onClick={() => dispatch(decreaseItems(cartItem))}
 					notAllowed={quantity === 1}
 				>
 					&#10094;
 				</Arrow>
 				{quantity}
-				<Arrow onClick={() => increase(cartItem)}>&#10095;</Arrow>
+				<Arrow onClick={() => dispatch(increaseItems(cartItem))}>
+					&#10095;
+				</Arrow>
 			</div>
 			<span className="price">£{price}</span>
 			<div
 				className="remove-button"
 				role="button"
 				tabIndex={0}
-				onClick={() => removeItems(cartItem)}
+				onClick={() => dispatch(removeItemsFromCart(cartItem))}
 				onKeyDown={() => {}}
 			>
 				&#10005;

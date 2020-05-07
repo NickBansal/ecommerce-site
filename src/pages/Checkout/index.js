@@ -1,21 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-
-import {
-	removeItemsFromCart,
-	decreaseItems,
-	increaseItems
-} from '../../redux/cart/actions';
+import { useSelector } from 'react-redux';
 
 import CheckoutItems from '../../components/CheckoutItems';
 import StripeButton from '../../components/StripeButton';
-
-import {
-	selectCartItems,
-	selectCartTotalPrice
-} from '../../redux/cart/selectors';
 
 const Container = styled.div`
 	width: 55%;
@@ -65,51 +53,41 @@ const CardDetails = styled.div`
 	margin-top: 10px;
 `;
 
-const Checkout = ({ cartItems, total, removeItems, decrease, increase }) => (
-	<Container>
-		<Header>
-			<HeaderBlock>Product</HeaderBlock>
-			<HeaderBlock>Description</HeaderBlock>
-			<HeaderBlock>Quantity</HeaderBlock>
-			<HeaderBlock>Price</HeaderBlock>
-			<HeaderBlock>Remove</HeaderBlock>
-		</Header>
-		{!cartItems.length ? (
-			<NoItems>There are no items here to buy</NoItems>
-		) : (
-			cartItems.map(cartItem => (
-				<CheckoutItems
-					key={`${cartItem.id} ${cartItem.name}`}
-					cartItem={cartItem}
-					removeItems={removeItems}
-					decrease={decrease}
-					increase={increase}
-				/>
-			))
-		)}
-		{Boolean(cartItems.length) && (
-			<>
-				<CardDetails>
-					*Please use the following card details when paying
-					<br />
-					4242 4242 4242 4242 - 01/30 - 123
-				</CardDetails>
-				<div className="total">TOTAL: £{total}</div>
-				<StripeButton className="stripe" price={total} />
-			</>
-		)}
-	</Container>
-);
+const Checkout = () => {
+	const cartItems = useSelector(state => state.cart.cartItems);
+	const total = useSelector(state => state.cart.totalPrice);
+	return (
+		<Container>
+			<Header>
+				<HeaderBlock>Product</HeaderBlock>
+				<HeaderBlock>Description</HeaderBlock>
+				<HeaderBlock>Quantity</HeaderBlock>
+				<HeaderBlock>Price</HeaderBlock>
+				<HeaderBlock>Remove</HeaderBlock>
+			</Header>
+			{!cartItems.length ? (
+				<NoItems>There are no items here to buy</NoItems>
+			) : (
+				cartItems.map(cartItem => (
+					<CheckoutItems
+						key={`${cartItem.id} ${cartItem.name}`}
+						cartItem={cartItem}
+					/>
+				))
+			)}
+			{Boolean(cartItems.length) && (
+				<>
+					<CardDetails>
+						*Please use the following card details when paying
+						<br />
+						4242 4242 4242 4242 - 01/30 - 123
+					</CardDetails>
+					<div className="total">TOTAL: £{total}</div>
+					<StripeButton className="stripe" price={total} />
+				</>
+			)}
+		</Container>
+	);
+};
 
-const mapStateToProps = createStructuredSelector({
-	cartItems: selectCartItems,
-	total: selectCartTotalPrice
-});
-
-const mapDispatchToProps = dispatch => ({
-	removeItems: user => dispatch(removeItemsFromCart(user)),
-	decrease: user => dispatch(decreaseItems(user)),
-	increase: user => dispatch(increaseItems(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default Checkout;
