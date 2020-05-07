@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItemsToCart } from '../../../redux/cart/actions';
 
 import CustomButton from '../../CustomButton';
@@ -50,36 +50,39 @@ const Footer = styled.div`
 	padding: 10px;
 `;
 
-const CollectionItems = ({ name, price, imageUrl, id, dispatch }) => (
-	<Item>
-		<div
-			className="image"
-			style={{
-				backgroundImage: `url(${imageUrl})`
-			}}
-		/>
-		<CustomButton
-			onClick={() => {
-				dispatch(
-					addItemsToCart({
-						name,
-						price,
-						imageUrl,
-						id
-					})
-				);
-			}}
-			className="custom-button"
-			inverted
-		>
-			{' '}
-			ADD TO CART{' '}
-		</CustomButton>
-		<Footer>
-			<span className="name">{name}</span>
-			<span className="price">£{price}</span>
-		</Footer>
-	</Item>
-);
+const CollectionItems = ({ name, price, imageUrl, id }) => {
+	const dispatch = useDispatch();
+	return (
+		<Item>
+			<div
+				className="image"
+				style={{
+					backgroundImage: `url(${imageUrl})`
+				}}
+			/>
+			<CustomButton
+				onClick={() => {
+					dispatch(
+						addItemsToCart({
+							name,
+							price,
+							imageUrl,
+							id
+						})
+					);
+				}}
+				className="custom-button"
+				inverted
+			>
+				{' '}
+				ADD TO CART{' '}
+			</CustomButton>
+			<Footer>
+				<span className="name">{name}</span>
+				<span className="price">£{price}</span>
+			</Footer>
+		</Item>
+	);
+};
 
-export default connect()(CollectionItems);
+export default CollectionItems;

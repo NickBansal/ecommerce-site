@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
@@ -8,8 +7,6 @@ import CustomButton from '../../CustomButton';
 import FormError from '../Error';
 
 import { signUpStart } from '../../../redux/user/actions';
-
-import { selectSignUpErrorMessage } from '../../../redux/user/selectors';
 
 const Container = styled.div`
 	display: flex;
@@ -22,13 +19,17 @@ const Container = styled.div`
 	}
 `;
 
-const SignUp = ({ signUp, errorMessage }) => {
+const SignUp = () => {
 	const [state, setState] = useState({
 		displayName: '',
 		email: '',
 		password: '',
 		confirmPassword: ''
 	});
+
+	const errorMessage = useSelector(userState => userState.user.signUpError);
+
+	const dispatch = useDispatch();
 
 	const handleSubmit = e => {
 		const { displayName, email, password, confirmPassword } = state;
@@ -39,7 +40,7 @@ const SignUp = ({ signUp, errorMessage }) => {
 			return;
 		}
 
-		signUp({ displayName, email, password });
+		dispatch(signUpStart({ displayName, email, password }));
 	};
 
 	const handleChange = e => {
@@ -96,12 +97,4 @@ const SignUp = ({ signUp, errorMessage }) => {
 	);
 };
 
-const mapStateToProps = createStructuredSelector({
-	errorMessage: selectSignUpErrorMessage
-});
-
-const mapDispatchToProps = dispatch => ({
-	signUp: userCredentials => dispatch(signUpStart(userCredentials))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUp;
