@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-
-import { selectCollectionForPreview } from '../../../redux/directory/selectors';
+import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/Collections/CollectionItems';
 
@@ -28,7 +25,10 @@ const Preview = styled.div`
 	}
 `;
 
-const CollectionOverview = ({ shopData }) => {
+const CollectionOverview = () => {
+	const data = useSelector(state => state.directory.data);
+	const shopData = Object.keys(data).map(key => data[key]);
+
 	return (
 		<div>
 			{shopData.map(({ items, title, routeName }) => {
@@ -49,8 +49,4 @@ const CollectionOverview = ({ shopData }) => {
 	);
 };
 
-const mapStateToProps = createStructuredSelector({
-	shopData: selectCollectionForPreview
-});
-
-export default connect(mapStateToProps)(CollectionOverview);
+export default CollectionOverview;

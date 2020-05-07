@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-
-import { selectCollection } from '../../../redux/directory/selectors';
+import { withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/Collections/CollectionItems';
 
@@ -34,7 +33,11 @@ const Preview = styled.div`
 	}
 `;
 
-const Collection = ({ shopData }) => {
+const Collection = ({ match }) => {
+	const shopData = useSelector(
+		state => state.directory.data[match.params.collectionId]
+	);
+
 	const { items, title } = shopData;
 
 	return (
@@ -49,8 +52,4 @@ const Collection = ({ shopData }) => {
 	);
 };
 
-const mapStateToProps = (state, ownProps) => ({
-	shopData: selectCollection(ownProps.match.params.collectionId)(state)
-});
-
-export default connect(mapStateToProps)(Collection);
+export default withRouter(Collection);

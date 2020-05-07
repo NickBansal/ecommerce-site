@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { fetchCollectionsStart } from '../../redux/directory/actions';
 
@@ -9,9 +9,11 @@ import {
 	CollectionsContainer
 } from '../../components/Collections/Containers';
 
-const ShopPage = ({ match, fetchCollections }) => {
+const ShopPage = ({ match }) => {
+	const dispatch = useDispatch();
+
 	useEffect(() => {
-		fetchCollections();
+		dispatch(fetchCollectionsStart());
 		// eslint-disable-next-line
 	}, []);
 
@@ -26,8 +28,4 @@ const ShopPage = ({ match, fetchCollections }) => {
 	);
 };
 
-const mapDispatchToProps = dispatch => ({
-	fetchCollections: () => dispatch(fetchCollectionsStart())
-});
-
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default ShopPage;

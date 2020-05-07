@@ -18,7 +18,8 @@ const DirMenu = styled.div`
 `;
 
 const HomePage = () => {
-	const sections = useSelector(state => state.cart.sections);
+	const sections = useSelector(state => state.directory.sections);
+
 	return (
 		<Container>
 			<DirMenu>
