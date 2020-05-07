@@ -22,15 +22,13 @@ const Container = styled.div`
 	}
 `;
 
-const blankForm = {
-	displayName: '',
-	email: '',
-	password: '',
-	confirmPassword: ''
-};
-
 const SignUp = ({ signUp, errorMessage }) => {
-	const [state, setState] = useState(blankForm);
+	const [state, setState] = useState({
+		displayName: '',
+		email: '',
+		password: '',
+		confirmPassword: ''
+	});
 
 	const handleSubmit = e => {
 		const { displayName, email, password, confirmPassword } = state;

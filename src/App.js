@@ -13,7 +13,7 @@ const App = ({ checkUser }) => {
 	useEffect(() => {
 		checkUser();
 		// eslint-disable-next-line
-	}, []);
+	}, [checkUserSession]);
 
 	return (
 		<div>
