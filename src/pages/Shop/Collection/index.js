@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import CollectionItems from '../../../components/Collections/CollectionItems';
+import CollectionItems from '../../../components/CollectionItems';
 import Loading from '../../../components/Loading';
 
 const Preview = styled.div`
