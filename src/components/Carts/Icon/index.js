@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { toggleCurrentCart } from '../../../redux/cart/actions';
-import { selectCartTotalItems } from '../../../redux/cart/selectors';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
 
@@ -31,15 +29,15 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = ({ totalItems, dispatch }) => (
-	<Container onClick={() => dispatch(toggleCurrentCart())}>
-		<ShoppingIcon className="shopping-icon" />
-		<span className="item-count"> {totalItems} </span>
-	</Container>
-);
+const CartIcon = () => {
+	const totalItems = useSelector(state => state.cart.totalItems);
+	const dispatch = useDispatch();
+	return (
+		<Container onClick={() => dispatch(toggleCurrentCart())}>
+			<ShoppingIcon className="shopping-icon" />
+			<span className="item-count"> {totalItems} </span>
+		</Container>
+	);
+};
 
-const mapStateToProps = createStructuredSelector({
-	totalItems: selectCartTotalItems
-});
-
-export default connect(mapStateToProps)(CartIcon);
+export default CartIcon;

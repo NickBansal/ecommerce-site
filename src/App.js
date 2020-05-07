@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useDispatch } from 'react-redux';
 
 import GlobalStyle from './utils/globalStyles';
 import Routes from './routing';
 import Header from './components/Header';
 
 import { checkUserSession } from './redux/user/actions';
-import { selectCurrentUser } from './redux/user/selectors';
 
-const App = ({ checkUser }) => {
+const App = () => {
+	const dispatch = useDispatch();
+
 	useEffect(() => {
-		checkUser();
+		dispatch(checkUserSession());
 		// eslint-disable-next-line
-	}, [checkUserSession]);
+	}, []);
 
 	return (
 		<div>
@@ -24,12 +24,4 @@ const App = ({ checkUser }) => {
 	);
 };
 
-const mapStateToProps = createStructuredSelector({
-	currentUser: selectCurrentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-	checkUser: () => dispatch(checkUserSession())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

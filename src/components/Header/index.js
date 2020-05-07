@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { signOutStart } from '../../redux/user/actions';
 
@@ -85,4 +85,4 @@ const Header = () => {
 	);
 };
 
-export default connect()(Header);
+export default Header;
