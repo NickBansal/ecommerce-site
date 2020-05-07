@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/CollectionItems';
@@ -34,8 +34,8 @@ const Preview = styled.div`
 	}
 `;
 
-const Collection = ({ match }) => {
-	const { collectionId } = match.params;
+const Collection = () => {
+	const { collectionId } = useParams();
 
 	const shopData = useSelector(state => state.directory.data);
 	const isLoading = useSelector(state => !state.directory.data);
@@ -58,4 +58,4 @@ const Collection = ({ match }) => {
 	);
 };
 
-export default withRouter(Collection);
+export default Collection;

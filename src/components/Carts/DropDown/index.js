@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -37,10 +37,12 @@ const NoItems = styled.p`
 	text-align: center;
 `;
 
-const CartDropDown = ({ history }) => {
+const CartDropDown = () => {
 	const cartItems = useSelector(state => state.cart.cartItems);
 
 	const dispatch = useDispatch();
+
+	const history = useHistory();
 
 	return (
 		<Container>
@@ -70,4 +72,4 @@ const CartDropDown = ({ history }) => {
 	);
 };
 
-export default withRouter(CartDropDown);
+export default CartDropDown;

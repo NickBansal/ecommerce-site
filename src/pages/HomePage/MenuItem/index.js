@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Item = styled.div`
 	min-width: 30%;
@@ -70,8 +70,11 @@ const BackgroundImage = styled.div`
 	transition: transform 2s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 `;
 
-const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
+const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
 	const [imgEffect, setImageEffect] = useState(false);
+
+	const history = useHistory();
+
 	return (
 		<Item
 			size={size}
@@ -88,4 +91,4 @@ const MenuItem = ({ title, imageUrl, size, history, linkUrl }) => {
 	);
 };
 
-export default withRouter(MenuItem);
+export default MenuItem;
