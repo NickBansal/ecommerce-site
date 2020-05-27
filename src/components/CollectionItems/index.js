@@ -52,6 +52,7 @@ const Footer = styled.div`
 
 const CollectionItems = ({ name, price, imageUrl, id }) => {
 	const dispatch = useDispatch();
+
 	return (
 		<Item>
 			<div
