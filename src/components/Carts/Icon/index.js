@@ -27,11 +27,11 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = ({ toggleHidden, hidden }) => {
+const CartIcon = ({ toggleHidden }) => {
 	const totalItems = useSelector(state => state.cart.totalItems);
 
 	return (
-		<Container onClick={() => toggleHidden(!hidden)}>
+		<Container onClick={toggleHidden}>
 			<ShoppingIcon className="shopping-icon" />
 			<span className="item-count"> {totalItems} </span>
 		</Container>

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 
-import { signOutStart } from '../../redux/user/actions';
+import { auth } from '../../firebase/utils';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
@@ -47,13 +46,11 @@ const Options = styled.div`
 `;
 
 const Header = () => {
-	const [hidden, toggleHidden] = useState(true);
+	const [hidden, setHidden] = useState(true);
+	const toggleHidden = () => setHidden(!hidden);
 
 	const currentUser = useContext(CurrentUserContext);
 	const cart = useContext(CartContext);
-	// const isDropdownHidden = useSelector(state => state.cart.hidden);
-
-	const dispatch = useDispatch();
 
 	return (
 		<>
@@ -74,7 +71,7 @@ const Header = () => {
 							className="option"
 							tabIndex="0"
 							role="button"
-							onClick={() => dispatch(signOutStart())}
+							onClick={() => auth.signOut()}
 						>
 							SIGN OUT
 						</div>
@@ -84,7 +81,7 @@ const Header = () => {
 						</Link>
 					)}
 					<CartContext.Provider value={{ ...cart, hidden }}>
-						<CartIcon toggleHidden={toggleHidden} hidden={hidden} />
+						<CartIcon toggleHidden={toggleHidden} />
 					</CartContext.Provider>
 				</Options>
 			</Container>
