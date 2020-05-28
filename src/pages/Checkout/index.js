@@ -56,8 +56,7 @@ const CardDetails = styled.div`
 
 const Checkout = () => {
 	const { cartItems, total } = useContext(CartContext);
-	// const cartItems = useSelector(state => state.cart.cartItems);
-	// const total = useSelector(state => state.cart.totalPrice);
+
 	return (
 		<Container>
 			<Header>
