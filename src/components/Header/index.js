@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { signOutStart } from '../../redux/user/actions';
 
@@ -9,7 +9,9 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import CartIcon from '../Carts/Icon';
 import CartDropDown from '../Carts/DropDown';
+
 import CurrentUserContext from '../../context/currentUser';
+import CartContext from '../../context/cart';
 
 const Container = styled.div`
 	display: flex;
@@ -45,9 +47,11 @@ const Options = styled.div`
 `;
 
 const Header = () => {
-	// const currentUser = useSelector(state => state.user.currentUser);
+	const [hidden, toggleHidden] = useState(true);
+
 	const currentUser = useContext(CurrentUserContext);
-	const isDropdownHidden = useSelector(state => state.cart.hidden);
+	const cart = useContext(CartContext);
+	// const isDropdownHidden = useSelector(state => state.cart.hidden);
 
 	const dispatch = useDispatch();
 
@@ -79,10 +83,12 @@ const Header = () => {
 							SIGN IN
 						</Link>
 					)}
-					<CartIcon />
+					<CartContext.Provider value={{ ...cart, hidden }}>
+						<CartIcon toggleHidden={toggleHidden} hidden={hidden} />
+					</CartContext.Provider>
 				</Options>
 			</Container>
-			{isDropdownHidden && <CartDropDown />}
+			{!hidden && <CartDropDown />}
 		</>
 	);
 };

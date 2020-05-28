@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { toggleCurrentCart } from '../../../redux/cart/actions';
+import { useSelector } from 'react-redux';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
 
@@ -29,11 +27,11 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = () => {
+const CartIcon = ({ toggleHidden, hidden }) => {
 	const totalItems = useSelector(state => state.cart.totalItems);
-	const dispatch = useDispatch();
+
 	return (
-		<Container onClick={() => dispatch(toggleCurrentCart())}>
+		<Container onClick={() => toggleHidden(!hidden)}>
 			<ShoppingIcon className="shopping-icon" />
 			<span className="item-count"> {totalItems} </span>
 		</Container>
