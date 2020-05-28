@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { addItemsToCart } from '../../redux/cart/actions';
 
 import CustomButton from '../CustomButton';
+
+import { CartContext } from '../../provider/cart';
 
 const Item = styled.div`
 	width: 22vw;
@@ -51,7 +51,8 @@ const Footer = styled.div`
 `;
 
 const CollectionItems = ({ name, price, imageUrl, id }) => {
-	const dispatch = useDispatch();
+	const { addItem } = useContext(CartContext);
+
 	return (
 		<Item>
 			<div
@@ -62,14 +63,12 @@ const CollectionItems = ({ name, price, imageUrl, id }) => {
 			/>
 			<CustomButton
 				onClick={() => {
-					dispatch(
-						addItemsToCart({
-							name,
-							price,
-							imageUrl,
-							id
-						})
-					);
+					addItem({
+						name,
+						price,
+						imageUrl,
+						id
+					});
 				}}
 				className="custom-button"
 				inverted

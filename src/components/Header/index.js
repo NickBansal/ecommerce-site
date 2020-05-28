@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,7 +10,7 @@ import CartIcon from '../Carts/Icon';
 import CartDropDown from '../Carts/DropDown';
 
 import CurrentUserContext from '../../context/currentUser';
-import CartContext from '../../context/cart';
+import { CartContext } from '../../provider/cart/index';
 
 const Container = styled.div`
 	display: flex;
@@ -46,11 +46,8 @@ const Options = styled.div`
 `;
 
 const Header = () => {
-	const [hidden, setHidden] = useState(true);
-	const toggleHidden = () => setHidden(!hidden);
-
 	const currentUser = useContext(CurrentUserContext);
-	const cart = useContext(CartContext);
+	const { hidden, toggleHidden } = useContext(CartContext);
 
 	return (
 		<>
@@ -80,9 +77,7 @@ const Header = () => {
 							SIGN IN
 						</Link>
 					)}
-					<CartContext.Provider value={{ ...cart, hidden }}>
-						<CartIcon toggleHidden={toggleHidden} />
-					</CartContext.Provider>
+					<CartIcon toggleHidden={toggleHidden} />
 				</Options>
 			</Container>
 			{!hidden && <CartDropDown />}
