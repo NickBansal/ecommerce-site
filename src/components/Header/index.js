@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 import CartIcon from '../Carts/Icon';
 import CartDropDown from '../Carts/DropDown';
+import CurrentUserContext from '../../context/currentUser';
 
 const Container = styled.div`
 	display: flex;
@@ -44,7 +45,8 @@ const Options = styled.div`
 `;
 
 const Header = () => {
-	const currentUser = useSelector(state => state.user.currentUser);
+	// const currentUser = useSelector(state => state.user.currentUser);
+	const currentUser = useContext(CurrentUserContext);
 	const isDropdownHidden = useSelector(state => state.cart.hidden);
 
 	const dispatch = useDispatch();
