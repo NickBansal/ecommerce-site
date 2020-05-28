@@ -1,17 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-import { useDispatch } from 'react-redux';
-import { clearCart } from '../../redux/cart/actions';
+
+import { CartContext } from '../../provider/cart';
 
 const StripeButton = ({ price }) => {
-	const dispatch = useDispatch();
-
+	const { emptyCart } = useContext(CartContext);
 	const priceForStripe = price * 100;
 	const publishableKey = 'pk_test_CXDPdTpBGh3d5iaS8yHnIdFG00Y0v2XEN0';
 
 	const onToken = () => {
 		alert('Payment successful');
-		dispatch(clearCart());
+		emptyCart();
 	};
 
 	return (
