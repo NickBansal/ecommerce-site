@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
 import FormError from '../Error';
 
-import { signUpStart } from '../../../redux/user/actions';
+import { auth } from '../../../firebase/utils';
+import createUser from '../../../firebase/createUser';
 
 const Container = styled.div`
 	display: flex;
@@ -26,21 +26,35 @@ const SignUp = () => {
 		password: '',
 		confirmPassword: ''
 	});
+	const [error, setError] = useState(null);
 
-	const errorMessage = useSelector(userState => userState.user.signUpError);
+	const handleSubmit = async event => {
+		event.preventDefault();
 
-	const dispatch = useDispatch();
-
-	const handleSubmit = e => {
 		const { displayName, email, password, confirmPassword } = state;
-		e.preventDefault();
 
 		if (password !== confirmPassword) {
-			alert('Password must match');
+			alert("passwords don't match");
 			return;
 		}
 
-		dispatch(signUpStart({ displayName, email, password }));
+		try {
+			const { user } = await auth.createUserWithEmailAndPassword(
+				email,
+				password
+			);
+
+			await createUser(user, { displayName });
+
+			setState({
+				displayName: '',
+				email: '',
+				password: '',
+				confirmPassword: ''
+			});
+		} catch (err) {
+			setError(err.message);
+		}
 	};
 
 	const handleChange = e => {
@@ -90,7 +104,7 @@ const SignUp = () => {
 					value={confirmPassword}
 					required
 				/>
-				{errorMessage && <FormError>{errorMessage.message}</FormError>}
+				{error && <FormError>{error}</FormError>}
 				<CustomButton type="submit"> SIGN UP </CustomButton>
 			</form>
 		</Container>
