@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import MenuItem from './MenuItem';
 
-import OPTIONS from '../../constants/options';
+import OptionsContext from '../../context/options';
 
 const Container = styled.div`
 	display: flex;
@@ -18,14 +18,17 @@ const DirMenu = styled.div`
 	justify-content: space-between;
 `;
 
-const HomePage = () => (
-	<Container>
-		<DirMenu>
-			{OPTIONS.map(({ id, ...rest }) => (
-				<MenuItem key={id} {...rest} />
-			))}
-		</DirMenu>
-	</Container>
-);
+const HomePage = () => {
+	const options = useContext(OptionsContext);
+	return (
+		<Container>
+			<DirMenu>
+				{options.map(({ id, ...rest }) => (
+					<MenuItem key={id} {...rest} />
+				))}
+			</DirMenu>
+		</Container>
+	);
+};
 
 export default HomePage;
