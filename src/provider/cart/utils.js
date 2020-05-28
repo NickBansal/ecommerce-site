@@ -37,3 +37,10 @@ export const getCartItemsCount = cartItems =>
 			accumalatedQuantity + cartItem.quantity,
 		0
 	);
+
+export const getCartTotalPrice = cartItems =>
+	cartItems.reduce(
+		(accumalatedQuantity, cartItem) =>
+			accumalatedQuantity + cartItem.price * cartItem.quantity,
+		0
+	);
