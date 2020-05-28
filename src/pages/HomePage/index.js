@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import MenuItem from './MenuItem';
+
+import OPTIONS from '../../constants/options';
 
 const Container = styled.div`
 	display: flex;
@@ -17,18 +18,14 @@ const DirMenu = styled.div`
 	justify-content: space-between;
 `;
 
-const HomePage = () => {
-	const sections = useSelector(state => state.directory.sections);
-
-	return (
-		<Container>
-			<DirMenu>
-				{sections.map(({ id, ...rest }) => (
-					<MenuItem key={id} {...rest} />
-				))}
-			</DirMenu>
-		</Container>
-	);
-};
+const HomePage = () => (
+	<Container>
+		<DirMenu>
+			{OPTIONS.map(({ id, ...rest }) => (
+				<MenuItem key={id} {...rest} />
+			))}
+		</DirMenu>
+	</Container>
+);
 
 export default HomePage;
