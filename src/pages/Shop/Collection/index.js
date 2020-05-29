@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
 import CollectionItems from '../../../components/CollectionItems';
+import Loading from '../../../components/Loading';
 
 import CollectionsContext from '../../../context/collections';
 
@@ -36,9 +37,13 @@ const Preview = styled.div`
 
 const Collection = () => {
 	const { collectionId } = useParams();
-	const shopData = useContext(CollectionsContext);
+	const { collection } = useContext(CollectionsContext);
 
-	const { items, title } = shopData[collectionId];
+	if (!collection) {
+		return <Loading />;
+	}
+
+	const { items, title } = collection[collectionId];
 
 	return (
 		<Preview>
