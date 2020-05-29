@@ -1,28 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
-import { fetchCollectionsStart } from '../../redux/directory/actions';
+import { firestore } from '../../firebase/utils';
+import convertCollectionsToMap from '../../firebase/convertCollectionsToMap';
+
+import CollectionContext from '../../context/collections';
 
 import Collection from './Collection';
 import Overview from './Overview';
 
 const ShopPage = ({ match }) => {
-	const dispatch = useDispatch();
+	const [collection, setCollection] = useState(null);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		dispatch(fetchCollectionsStart());
+		const collectionRef = firestore.collection('collections');
+
+		collectionRef
+			.get()
+			.then(snapshot => {
+				const collectionsMap = convertCollectionsToMap(snapshot);
+				setError(null);
+				setCollection(collectionsMap);
+			})
+			.catch(err => {
+				setError(err);
+			});
 		// eslint-disable-next-line
 	}, []);
 
 	return (
-		<Switch>
-			<Route exact path={`${match.path}`} component={Overview} />
-			<Route
-				path={`${match.path}/:collectionId`}
-				component={Collection}
-			/>
-		</Switch>
+		<CollectionContext.Provider value={{ collection, error }}>
+			<Switch>
+				<Route exact path={`${match.path}`} component={Overview} />
+				<Route
+					path={`${match.path}/:collectionId`}
+					component={Collection}
+				/>
+			</Switch>
+		</CollectionContext.Provider>
 	);
 };
 

@@ -1,7 +1,5 @@
 import { createContext } from 'react';
 
-import SHOP_DATA from '../../constants/shop-data';
-
-const CollectionsContext = createContext(SHOP_DATA);
+const CollectionsContext = createContext({ collection: null, error: null });
 
 export default CollectionsContext;
