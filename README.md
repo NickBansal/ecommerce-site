@@ -6,4 +6,5 @@
 * Firebase
 * HOC
 * React-router-dom
+* Stripe (BACKEND)
 
