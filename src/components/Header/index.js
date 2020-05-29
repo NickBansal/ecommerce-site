@@ -10,7 +10,7 @@ import CartIcon from '../Carts/Icon';
 import CartDropDown from '../Carts/DropDown';
 
 import CurrentUserContext from '../../context/currentUser';
-import { CartContext } from '../../provider/cart/index';
+import { CartContext } from '../../context/cart/index';
 
 const Container = styled.div`
 	display: flex;

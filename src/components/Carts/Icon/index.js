@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
 
-import { CartContext } from '../../../provider/cart/index';
+import { CartContext } from '../../../context/cart/index';
 
 const Container = styled.div`
 	width: 45px;

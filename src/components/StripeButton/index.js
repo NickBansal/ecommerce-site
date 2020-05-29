@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
-import { CartContext } from '../../provider/cart';
+import { CartContext } from '../../context/cart';
 
 const StripeButton = ({ price }) => {
 	const { emptyCart } = useContext(CartContext);

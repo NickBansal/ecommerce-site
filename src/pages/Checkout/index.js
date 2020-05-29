@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CheckoutItems from '../../components/CheckoutItems';
 import StripeButton from '../../components/StripeButton';
 
-import { CartContext } from '../../provider/cart/index';
+import { CartContext } from '../../context/cart/index';
 
 const Container = styled.div`
 	width: 55%;

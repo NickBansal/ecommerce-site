@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CustomButton from '../CustomButton';
 
-import { CartContext } from '../../provider/cart';
+import { CartContext } from '../../context/cart';
 
 const Item = styled.div`
 	width: 22vw;

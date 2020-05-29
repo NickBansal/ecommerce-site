@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import { CartContext } from '../../provider/cart/index';
+import { CartContext } from '../../context/cart/index';
 
 const Container = styled.div`
 	width: 100%;
