@@ -22,6 +22,11 @@ const Container = styled.div`
 	background: lightgrey;
 	opacity: 0.8;
 	padding: 10px 20px;
+
+	@media screen and (max-width: 800px) {
+		height: 60px;
+		padding: 10px;
+	}
 `;
 
 const LogoStyled = styled(Logo)`
@@ -31,7 +36,7 @@ const LogoStyled = styled(Logo)`
 `;
 
 const Options = styled.div`
-	width: 50%;
+	width: 80%;
 	height: 100%;
 	display: flex;
 	align-items: center;

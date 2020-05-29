@@ -88,7 +88,7 @@ const CheckoutItems = ({ cartItem }) => {
 					&#10095;
 				</Arrow>
 			</div>
-			<span className="price">£{price}</span>
+			<span className="price">£{price * quantity}</span>
 			<div
 				className="remove-button"
 				role="button"

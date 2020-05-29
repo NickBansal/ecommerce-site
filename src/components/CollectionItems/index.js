@@ -40,6 +40,20 @@ const Item = styled.div`
 			transition: opacity 0.3s linear;
 		}
 	}
+
+	@media screen and (max-width: 800px) {
+		width: 40vw;
+
+		&:hover {
+			.image {
+				opacity: unset;
+			}
+
+			.custom-button {
+				opacity: unset;
+			}
+		}
+	}
 `;
 
 const Footer = styled.div`

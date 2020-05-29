@@ -58,6 +58,10 @@ const Item = styled.div`
 			transition: opacity 1s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 		}
 	}
+
+	@media screen and (max-width: 800px) {
+		height: 200px;
+	}
 `;
 
 const BackgroundImage = styled.div`
