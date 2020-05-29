@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import MenuItem from './MenuItem';
+
+import OptionsContext from '../../context/options';
 
 const Container = styled.div`
 	display: flex;
@@ -18,12 +19,11 @@ const DirMenu = styled.div`
 `;
 
 const HomePage = () => {
-	const sections = useSelector(state => state.directory.sections);
-
+	const options = useContext(OptionsContext);
 	return (
 		<Container>
 			<DirMenu>
-				{sections.map(({ id, ...rest }) => (
+				{options.map(({ id, ...rest }) => (
 					<MenuItem key={id} {...rest} />
 				))}
 			</DirMenu>

@@ -1,12 +1,7 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import {
-	removeItemsFromCart,
-	decreaseItems,
-	increaseItems
-} from '../../redux/cart/actions';
+import { CartContext } from '../../context/cart/index';
 
 const Container = styled.div`
 	width: 100%;
@@ -68,7 +63,7 @@ const Image = styled.div`
 const CheckoutItems = ({ cartItem }) => {
 	const { name, imageUrl, price, quantity } = cartItem;
 
-	const dispatch = useDispatch();
+	const { addItem, removeItem, clearItemFromCart } = useContext(CartContext);
 
 	return (
 		<Container>
@@ -78,22 +73,24 @@ const CheckoutItems = ({ cartItem }) => {
 			<span className="name">{name}</span>
 			<div className="quantity">
 				<Arrow
-					onClick={() => dispatch(decreaseItems(cartItem))}
+					onClick={() => {
+						if (quantity !== 1) {
+							removeItem(cartItem);
+						}
+					}}
 					notAllowed={quantity === 1}
 				>
 					&#10094;
 				</Arrow>
 				{quantity}
-				<Arrow onClick={() => dispatch(increaseItems(cartItem))}>
-					&#10095;
-				</Arrow>
+				<Arrow onClick={() => addItem(cartItem)}>&#10095;</Arrow>
 			</div>
 			<span className="price">£{price * quantity}</span>
 			<div
 				className="remove-button"
 				role="button"
 				tabIndex={0}
-				onClick={() => dispatch(removeItemsFromCart(cartItem))}
+				onClick={() => clearItemFromCart(cartItem)}
 				onKeyDown={() => {}}
 			>
 				&#10005;

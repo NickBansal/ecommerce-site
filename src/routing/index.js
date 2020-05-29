@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+import CurrentUserContext from '../context/currentUser';
 
 import { HomePage, Shop, SignIn, Checkout } from '../pages';
 
 const Routes = () => {
-	const currentUser = useSelector(state => state.user.currentUser);
+	const currentUser = useContext(CurrentUserContext);
+
 	return (
 		<Switch>
 			<Route exact path="/" component={HomePage} />

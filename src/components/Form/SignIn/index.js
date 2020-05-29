@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import FormInput from '../FormInput';
 import CustomButton from '../../CustomButton';
 import FormError from '../Error';
 
-import {
-	googleSignInStart,
-	emailSignInStart
-} from '../../../redux/user/actions';
+import { auth, googleProvider } from '../../../firebase/utils';
 
 const Container = styled.div`
 	width: 380px;
@@ -29,15 +25,19 @@ const SignInForm = () => {
 		password: ''
 	});
 
-	const errorMessage = useSelector(userState => userState.user.errorMessage);
+	const [error, setError] = useState(null);
 
-	const dispatch = useDispatch();
+	const handleSubmit = async event => {
+		event.preventDefault();
 
-	const handleSubmit = async e => {
 		const { email, password } = state;
-		e.preventDefault();
 
-		dispatch(emailSignInStart({ email, password }));
+		try {
+			await auth.signInWithEmailAndPassword(email, password);
+			setState({ email: '', password: '' });
+		} catch (err) {
+			setError(err.message);
+		}
 	};
 
 	const handleChange = e => {
@@ -72,12 +72,12 @@ const SignInForm = () => {
 					value={password}
 					required
 				/>
-				{errorMessage && <FormError>{errorMessage.message}</FormError>}
+				{error && <FormError>{error}</FormError>}
 				<Buttons>
 					<CustomButton type="submit"> SIGN IN </CustomButton>
 					<CustomButton
 						type="button"
-						onClick={() => dispatch(googleSignInStart())}
+						onClick={() => auth.signInWithPopup(googleProvider)}
 						isGoogle
 					>
 						{' '}

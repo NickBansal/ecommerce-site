@@ -1,25 +1,44 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 
 import GlobalStyle from './utils/globalStyles';
 import Routes from './routing';
 import Header from './components/Header';
 
-import { checkUserSession } from './redux/user/actions';
+import CurrentUserContext from './context/currentUser';
+import { auth } from './firebase/utils';
+import createUser from './firebase/createUser';
 
 const App = () => {
-	const dispatch = useDispatch();
+	const [state, setState] = useState(null);
 
 	useEffect(() => {
-		dispatch(checkUserSession());
+		let unsubscribeFromAuth = null;
+		unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+			if (userAuth) {
+				const userRef = await createUser(userAuth);
+
+				userRef.onSnapshot(snapShot => {
+					setState({
+						id: snapShot.id,
+						...snapShot.data()
+					});
+				});
+			}
+
+			setState(userAuth);
+		});
+
+		return () => unsubscribeFromAuth();
 		// eslint-disable-next-line
 	}, []);
 
 	return (
 		<div>
 			<GlobalStyle />
-			<Header />
-			<Routes />
+			<CurrentUserContext.Provider value={state}>
+				<Header />
+				<Routes />
+			</CurrentUserContext.Provider>
 		</div>
 	);
 };

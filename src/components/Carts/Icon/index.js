@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { toggleCurrentCart } from '../../../redux/cart/actions';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
+
+import { CartContext } from '../../../context/cart/index';
 
 const Container = styled.div`
 	width: 45px;
@@ -30,12 +29,12 @@ const Container = styled.div`
 `;
 
 const CartIcon = () => {
-	const totalItems = useSelector(state => state.cart.totalItems);
-	const dispatch = useDispatch();
+	const { toggleHidden, cartItemsCount } = useContext(CartContext);
+
 	return (
-		<Container onClick={() => dispatch(toggleCurrentCart())}>
+		<Container onClick={toggleHidden}>
 			<ShoppingIcon className="shopping-icon" />
-			<span className="item-count"> {totalItems} </span>
+			<span className="item-count"> {cartItemsCount} </span>
 		</Container>
 	);
 };

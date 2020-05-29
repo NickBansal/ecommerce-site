@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import CheckoutItems from '../../components/CheckoutItems';
 import StripeButton from '../../components/StripeButton';
+
+import { CartContext } from '../../context/cart/index';
 
 const Container = styled.div`
 	width: 55%;
@@ -54,8 +55,8 @@ const CardDetails = styled.div`
 `;
 
 const Checkout = () => {
-	const cartItems = useSelector(state => state.cart.cartItems);
-	const total = useSelector(state => state.cart.totalPrice);
+	const { cartItems, total } = useContext(CartContext);
+
 	return (
 		<Container>
 			<Header>
