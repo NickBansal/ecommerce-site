@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CollectionItems from '../../../components/CollectionItems';
+import CollectionItemsContainer from '../../../components/CollectionItems/container';
 
 const Preview = styled.div`
 	display: flex;
@@ -45,7 +45,7 @@ const Collection = ({ data }) => {
 			<h2 className="title">{title.toUpperCase()}</h2>
 			<div className="items">
 				{items.map(({ id, ...rest }) => (
-					<CollectionItems key={id} id={id} {...rest} />
+					<CollectionItemsContainer key={id} id={id} {...rest} />
 				))}
 			</div>
 		</Preview>

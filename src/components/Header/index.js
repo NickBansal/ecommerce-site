@@ -7,8 +7,8 @@ import { signOutStart } from '../../redux/user/actions';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 
-import CartIcon from '../Carts/Icon';
-import CartDropDown from '../Carts/DropDown';
+import CartIconContainer from '../Carts/Icon/container';
+import CartDropDownContainer from '../Carts/DropDown/container';
 
 const Container = styled.div`
 	display: flex;
@@ -48,9 +48,8 @@ const Options = styled.div`
 	}
 `;
 
-const Header = () => {
+const Header = ({ hidden }) => {
 	const currentUser = useSelector(state => state.user.currentUser);
-	const isDropdownHidden = useSelector(state => state.cart.hidden);
 
 	const dispatch = useDispatch();
 
@@ -82,10 +81,10 @@ const Header = () => {
 							SIGN IN
 						</Link>
 					)}
-					<CartIcon />
+					<CartIconContainer />
 				</Options>
 			</Container>
-			{isDropdownHidden && <CartDropDown />}
+			{hidden && <CartDropDownContainer />}
 		</>
 	);
 };

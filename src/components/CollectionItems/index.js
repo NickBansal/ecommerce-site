@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { addItemsToCart } from '../../redux/cart/actions';
 
 import CustomButton from '../CustomButton';
 
@@ -64,8 +62,7 @@ const Footer = styled.div`
 	padding: 10px;
 `;
 
-const CollectionItems = ({ name, price, imageUrl, id }) => {
-	const dispatch = useDispatch();
+const CollectionItems = ({ name, price, imageUrl, id, addItemToCart }) => {
 	return (
 		<Item>
 			<div
@@ -76,14 +73,12 @@ const CollectionItems = ({ name, price, imageUrl, id }) => {
 			/>
 			<CustomButton
 				onClick={() => {
-					dispatch(
-						addItemsToCart({
-							name,
-							price,
-							imageUrl,
-							id
-						})
-					);
+					addItemToCart({
+						name,
+						price,
+						imageUrl,
+						id
+					});
 				}}
 				className="custom-button"
 				inverted

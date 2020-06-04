@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import GlobalStyle from './utils/globalStyles';
 import Routes from './routing';
-import Header from './components/Header';
+import HeaderContainer from './components/Header/container';
 
 import { checkUserSession } from './redux/user/actions';
 
@@ -18,7 +18,7 @@ const App = () => {
 	return (
 		<div>
 			<GlobalStyle />
-			<Header />
+			<HeaderContainer />
 			<Routes />
 		</div>
 	);

@@ -1,12 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 
 import CustomButton from '../../CustomButton';
 import CartItems from '../Items';
-
-import { toggleCurrentCart } from '../../../redux/cart/actions';
 
 const Container = styled.div`
 	position: fixed;
@@ -37,11 +34,7 @@ const NoItems = styled.p`
 	text-align: center;
 `;
 
-const CartDropDown = () => {
-	const cartItems = useSelector(state => state.cart.cartItems);
-
-	const dispatch = useDispatch();
-
+const CartDropDown = ({ cartItems, toggleCartHidden }) => {
 	const history = useHistory();
 
 	return (
@@ -61,7 +54,7 @@ const CartDropDown = () => {
 					<CustomButton
 						onClick={() => {
 							history.push('/checkout');
-							dispatch(toggleCurrentCart());
+							toggleCartHidden();
 						}}
 					>
 						GO TO CHECKOUT
