@@ -1,14 +1,21 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
-import Collection from './Collection/container';
+import CollectionContainer from './Collection/container';
 import OverviewContainer from './Overview/container';
 
-const ShopPage = ({ match }) => (
-	<Switch>
-		<Route exact path={`${match.path}`} component={OverviewContainer} />
-		<Route path={`${match.path}/:collectionId`} component={Collection} />
-	</Switch>
-);
+const ShopPage = () => {
+	const match = useRouteMatch();
+
+	return (
+		<Switch>
+			<Route exact path={`${match.path}`} component={OverviewContainer} />
+			<Route
+				path={`${match.path}/:collectionId`}
+				component={CollectionContainer}
+			/>
+		</Switch>
+	);
+};
 
 export default ShopPage;
