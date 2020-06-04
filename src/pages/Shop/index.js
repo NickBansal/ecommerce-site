@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchCollectionsStart } from '../../redux/directory/actions';
 
 import Collection from './Collection';
-import Overview from './Overview';
+import OverviewContainer from './Overview/container';
 
 const ShopPage = ({ match }) => {
 	const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const ShopPage = ({ match }) => {
 
 	return (
 		<Switch>
-			<Route exact path={`${match.path}`} component={Overview} />
+			<Route exact path={`${match.path}`} component={OverviewContainer} />
 			<Route
 				path={`${match.path}/:collectionId`}
 				component={Collection}

@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/CollectionItems';
-import Loading from '../../../components/Loading';
 
 const Preview = styled.div`
 	display: flex;
@@ -26,16 +24,7 @@ const Preview = styled.div`
 	}
 `;
 
-const CollectionOverview = () => {
-	const data = useSelector(state => state.directory.data);
-	const isLoading = useSelector(state => !state.directory.data);
-
-	if (isLoading) {
-		return <Loading />;
-	}
-
-	const shopData = Object.keys(data).map(key => data[key]);
-
+const CollectionOverview = ({ shopData }) => {
 	return (
 		<div>
 			{shopData.map(({ items, title, routeName }) => {
