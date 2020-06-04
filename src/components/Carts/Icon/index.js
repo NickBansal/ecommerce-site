@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import { ReactComponent as ShoppingIcon } from '../../../assets/cart.svg';
 
@@ -27,15 +26,11 @@ const Container = styled.div`
 	}
 `;
 
-const CartIcon = ({ toggleCartHidden }) => {
-	const totalItems = useSelector(state => state.cart.totalItems);
-
-	return (
-		<Container onClick={() => toggleCartHidden()}>
-			<ShoppingIcon className="shopping-icon" />
-			<span className="item-count"> {totalItems} </span>
-		</Container>
-	);
-};
+const CartIcon = ({ toggleCartHidden, itemCount }) => (
+	<Container onClick={() => toggleCartHidden()}>
+		<ShoppingIcon className="shopping-icon" />
+		<span className="item-count"> {itemCount} </span>
+	</Container>
+);
 
 export default CartIcon;
