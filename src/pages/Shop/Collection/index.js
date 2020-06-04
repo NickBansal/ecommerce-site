@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import CollectionItems from '../../../components/CollectionItems';
-import Loading from '../../../components/Loading';
 
 const Preview = styled.div`
 	display: flex;
@@ -40,17 +37,8 @@ const Preview = styled.div`
 	}
 `;
 
-const Collection = () => {
-	const { collectionId } = useParams();
-
-	const shopData = useSelector(state => state.directory.data);
-	const isLoading = useSelector(state => !state.directory.data);
-
-	if (isLoading) {
-		return <Loading />;
-	}
-
-	const { items, title } = shopData[collectionId];
+const Collection = ({ data }) => {
+	const { items, title } = data;
 
 	return (
 		<Preview>

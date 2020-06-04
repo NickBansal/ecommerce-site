@@ -27,10 +27,10 @@ const Preview = styled.div`
 const CollectionOverview = ({ shopData }) => {
 	return (
 		<div>
-			{shopData.map(({ items, title, routeName }) => {
+			{shopData.map(({ items, title }) => {
 				return (
 					<Preview key={title}>
-						<Link to={`/shop/${routeName}`}>
+						<Link to={`/shop/${title.toLowerCase()}`}>
 							<h1 className="title">{title.toUpperCase()}</h1>
 						</Link>
 						<div className="preview">
