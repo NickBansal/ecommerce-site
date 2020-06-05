@@ -1,6 +1,6 @@
 import HomePage from './HomePage';
 import Shop from './Shop';
 import SignIn from './SignIn';
-import Checkout from './Checkout';
+import CheckoutContainer from './Checkout/container';
 
-export { HomePage, Shop, SignIn, Checkout };
+export { HomePage, Shop, SignIn, CheckoutContainer };

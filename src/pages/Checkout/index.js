@@ -53,8 +53,7 @@ const CardDetails = styled.div`
 	margin-top: 10px;
 `;
 
-const Checkout = () => {
-	const cartItems = useSelector(state => state.cart.cartItems);
+const Checkout = ({ cartItems }) => {
 	const total = useSelector(state => state.cart.totalPrice);
 	return (
 		<Container>
