@@ -3,7 +3,8 @@ import { gql } from 'apollo-boost';
 import {
 	addItemToCart,
 	getCartItemCount,
-	getCartTotalPrice
+	getCartTotalPrice,
+	removeItemFromCart
 } from './cartUtils';
 
 export const typeDefs = gql`
@@ -15,6 +16,7 @@ export const typeDefs = gql`
 	extend type Mutation {
 		ToggleCartHidden: Boolean!
 		AddItemToCart(item: Item!): [Item]!
+		RemoveItemFromCart(item: Item!): [Item]!
 	}
 `;
 
@@ -63,6 +65,29 @@ export const resolvers = {
 			});
 
 			const newCartItems = addItemToCart(cartItems, item);
+
+			cache.writeQuery({
+				query: GET_ITEM_COUNT,
+				data: { itemCount: getCartItemCount(newCartItems) }
+			});
+
+			cache.writeQuery({
+				query: GET_TOTAL_PRICE,
+				data: { totalPrice: getCartTotalPrice(newCartItems) }
+			});
+
+			cache.writeQuery({
+				query: GET_CART_ITEMS,
+				data: { cartItems: newCartItems }
+			});
+		},
+
+		removeItemFromCart: (_root, { item }, { cache }) => {
+			const { cartItems } = cache.readQuery({
+				query: GET_CART_ITEMS
+			});
+
+			const newCartItems = removeItemFromCart(cartItems, item);
 
 			cache.writeQuery({
 				query: GET_ITEM_COUNT,
