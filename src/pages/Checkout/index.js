@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import CheckoutItems from '../../components/CheckoutItems';
 import StripeButton from '../../components/StripeButton';
@@ -53,8 +52,7 @@ const CardDetails = styled.div`
 	margin-top: 10px;
 `;
 
-const Checkout = ({ cartItems, addItemToCart }) => {
-	const total = useSelector(state => state.cart.totalPrice);
+const Checkout = ({ cartItems, addItemToCart, totalPrice }) => {
 	return (
 		<Container>
 			<Header>
@@ -82,8 +80,8 @@ const Checkout = ({ cartItems, addItemToCart }) => {
 						<br />
 						4242 4242 4242 4242 - 01/30 - 123
 					</CardDetails>
-					<div className="total">TOTAL: £{total}</div>
-					<StripeButton className="stripe" price={total} />
+					<div className="total">TOTAL: £{totalPrice}</div>
+					<StripeButton className="stripe" price={totalPrice} />
 				</>
 			)}
 		</Container>

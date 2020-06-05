@@ -4,9 +4,10 @@ import { gql } from 'apollo-boost';
 
 import Checkout from '.';
 
-const GET_CART_ITEMS = gql`
+const GET_CART_ITEMS_AND_PRICE = gql`
 	{
 		cartItems @client
+		totalPrice @client
 	}
 `;
 
@@ -19,13 +20,14 @@ const ADD_ITEM_TO_CART = gql`
 const CheckoutContainer = () => (
 	<Mutation mutation={ADD_ITEM_TO_CART}>
 		{addItemToCart => (
-			<Query query={GET_CART_ITEMS}>
-				{({ data: { cartItems } }) => (
+			<Query query={GET_CART_ITEMS_AND_PRICE}>
+				{({ data: { cartItems, totalPrice } }) => (
 					<Checkout
 						cartItems={cartItems}
 						addItemToCart={item =>
 							addItemToCart({ variables: { item } })
 						}
+						totalPrice={totalPrice}
 					/>
 				)}
 			</Query>

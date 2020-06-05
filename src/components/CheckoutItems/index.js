@@ -2,11 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import {
-	removeItemsFromCart,
-	decreaseItems,
-	increaseItems
-} from '../../redux/cart/actions';
+import { removeItemsFromCart, decreaseItems } from '../../redux/cart/actions';
 
 const Container = styled.div`
 	width: 100%;
@@ -66,7 +62,7 @@ const Image = styled.div`
 `;
 
 const CheckoutItems = ({ cartItem, addItemToCart }) => {
-	const { name, imageUrl, price, quantity, id } = cartItem;
+	const { name, imageUrl, price, quantity } = cartItem;
 
 	const dispatch = useDispatch();
 
@@ -84,18 +80,7 @@ const CheckoutItems = ({ cartItem, addItemToCart }) => {
 					&#10094;
 				</Arrow>
 				{quantity}
-				<Arrow
-					onClick={() =>
-						addItemToCart({
-							name,
-							price,
-							imageUrl,
-							id
-						})
-					}
-				>
-					&#10095;
-				</Arrow>
+				<Arrow onClick={() => addItemToCart(cartItem)}>&#10095;</Arrow>
 			</div>
 			<span className="price">£{price * quantity}</span>
 			<div
