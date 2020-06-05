@@ -65,8 +65,8 @@ const Image = styled.div`
 	}
 `;
 
-const CheckoutItems = ({ cartItem }) => {
-	const { name, imageUrl, price, quantity } = cartItem;
+const CheckoutItems = ({ cartItem, addItemToCart }) => {
+	const { name, imageUrl, price, quantity, id } = cartItem;
 
 	const dispatch = useDispatch();
 
@@ -84,7 +84,16 @@ const CheckoutItems = ({ cartItem }) => {
 					&#10094;
 				</Arrow>
 				{quantity}
-				<Arrow onClick={() => dispatch(increaseItems(cartItem))}>
+				<Arrow
+					onClick={() =>
+						addItemToCart({
+							name,
+							price,
+							imageUrl,
+							id
+						})
+					}
+				>
 					&#10095;
 				</Arrow>
 			</div>

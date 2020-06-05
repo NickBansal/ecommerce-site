@@ -53,7 +53,7 @@ const CardDetails = styled.div`
 	margin-top: 10px;
 `;
 
-const Checkout = ({ cartItems }) => {
+const Checkout = ({ cartItems, addItemToCart }) => {
 	const total = useSelector(state => state.cart.totalPrice);
 	return (
 		<Container>
@@ -71,6 +71,7 @@ const Checkout = ({ cartItems }) => {
 					<CheckoutItems
 						key={`${cartItem.id} ${cartItem.name}`}
 						cartItem={cartItem}
+						addItemToCart={addItemToCart}
 					/>
 				))
 			)}

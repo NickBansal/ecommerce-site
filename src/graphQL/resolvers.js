@@ -5,7 +5,6 @@ import { addItemToCart, getCartItemCount } from './cartUtils';
 export const typeDefs = gql`
 	extend type Item {
 		quantity: Int
-		price: Int
 	}
 
 	extend type Mutation {
